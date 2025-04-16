@@ -1,84 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Root备忘录</title>
-    <url>/2024/11/08/Root%E5%A4%87%E5%BF%98%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="root-bei-wang-lu">root备忘录</h1>
-<h2 id="qian-yan" id="前言">前言</h2>
-<p>本人的手机于2022年2月7日购入，如今它的电池已经不耐操了，一天要两充到三充。可是它运行流畅（指流畅运行巨信），现在换机显得浪费我这个芯片了。那么，改一下系统调度会不会好一些呢🤔。好，来刷个机吧。</p>
-<p>以下记录了遇到的问题以备日后不时之需。</p>
-<h2 id="she-bei" id="设备">设备</h2>
-<ul>
-<li>Redmi Note 10 Pro<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
-</ul>
-<h2 id="root" id="root">root</h2>
-<p>用小米解锁工具解锁之后，第一次重启卡在了MIUI界面，想起来解锁前忘记打开“OEM解锁”了，吓得我一身冷汗😰。好在第二次重启成功了，没有变砖🥰。</p>
-<h2 id="guo-momo-jian-ce" id="过momo检测">过momo检测</h2>
-<p>我使用了kitsune mask作为root管理器，它本身提供了较强大的隐藏root的功能。隐藏root有白名单和黑名单两种模式。一般使用黑名单模式即可，不过勾选进黑名单的应用貌似无法启动，会卡白屏（测试了微信和momo两个应用），大概是我手机的玄学问题吧。白名单模式就没事了。</p>
-<p>开启隐藏前：<br>
-<img src="qian.webp" alt=""><br>
-开启隐藏后：<br>
-<img src="hou.webp" alt=""></p>
-<p>至于bootloader未锁定，可以通过刷safetynet fix模块来骗过momo，但不知道能不能骗过其他程序。</p>
-<h2 id="wei-xin-xiao-cheng-xu-wu-fa-da-kai" id="微信小程序无法打开">微信小程序无法打开</h2>
-<p>下载了Google play版微信，但发现小程序打不开😱，点小程序就卡在“正在加载”，难道是root的问题？瞎调一番后，偶然打开Google play，提示正在更新微信，更新完就能开小程序了😅。</p>
-<h2 id="wu-fa-lian-jie-wi-fi" id="无法连接WiFi">无法连接WiFi</h2>
-<p>打算连接舍友的手机热点，发现连不上，怎么点都显示“已保存”。几番调试，发现是无法连接WPA3-Personal加密的WiFi，其他加密方式可以连。但是之前我倒是可以连舍友WiFi。目前暂未找到解决方案。</p>
-<p><img src="wifi.webp" alt=""></p>
-<hr>
-<h1 id="lei-yuan-sheng-zhi-lu">类原生之旅</h1>
-<p>网上看到DSU Sideload这个软件.它利用了安卓自带的动态系统更新功能，但是可以自己分配动态系统的用户数据空间。也就是说，可以讲这个动态系统作为主力系统使用🤪。于是尝试了刷入CrDroid的GSI(通用系统镜像)。这可是人生中第一次用类原生当主力机器🥰。但是毕竟没经过适配，所以系统有Bug。</p>
-<p>CrDroid 9.X（安卓13） 版本下的bug：</p>
-<ul>
-<li>蓝牙断连</li>
-<li>5G环境下无法通话和收发短信</li>
-<li>无法使用杜比全景声</li>
-</ul>
-<p>CrDroid 10.X（安卓14） 版本下的bug：</p>
-<ul>
-<li>无法使用人脸识别</li>
-<li>仅使用了几天，测试不全</li>
-</ul>
-<p>刷上去之后，本以为可以回到一天一充的时代，但是貌似是我高估了类原生了。一天两充还是最低标准😥。看来就是硬件损耗了。</p>
-<p>用了一段时间，还是不能自适应这些bug，而且续航并没有提升。还是回去MIUI吧😅。</p>
-<p><s>为什么这一段没图呢？因为手机现在已经变砖了</s></p>
-<h1 id="yuan-ni-shua-ji-ban-sheng-gui-lai-gui-bu-lai-liao-a-a-a">愿你刷机半生，归来…归不来了啊啊啊</h1>
-<p>前文提到我使用的是动态系统。回去之前的MIUI14还是很顺利的。但是有一个说法：出厂系统就是最好的系统。于是决定刷回出厂的MIUI12.5.</p>
-<p>当然是选择最安全的Fastboot + miflash刷机大法。但在此之前，我萌生了个想法：何不把boot.img文件用magisk修补之后放回刷机包呢，这样就不用再次进Fastboot来root了🤪。</p>
-<p>经过漫长的等待，得到的是进度条的标红＞﹏＜，提示check boot_ab failed。看起来我偷梁换柱的计划露出鸡脚了。但是它还停留在Fastboot界面。</p>
-<p>好吧，已老实。刷原系统吧。这下总不会有问题吧，于是我安心地去刷牙了（此时是22：40）。</p>
-<p>事实证明，不要晚上刷机。刷完牙回来，天都塌了</p>
-<p>屏幕上鲜艳的红条直接让我心肺骤停（也是提示check xxx failed）。？？？，这还能报错？屏幕还黑了？尝试重新进入Fastboot…</p>
-<p>它没反应！！！而且电脑还一直有插入、拔出设备的提示音！看着计算机设备上的MediaTek device陷入了沉思，这是给我干进深度刷机里了？</p>
-<p>按照网上方法，使用SP Flash救砖。但是多次尝试，换了两个刷机包，仍然报错</p>
-<p><img src="dead.webp" alt=""></p>
-<p>已经23：45了，明天还要上课＞︿＜。当机立断，下单Redmi K80，以后再也不乱搞主力机了😭。<s>想不到我也有冲首发的一天</s></p>
-<hr>
-<p><s>我敬爱的Redmi Note 10 Pro同志Fastboot刷机失败，深度刷机抢救无效，于2024年11月28日逝世，享年2.8岁</s></p>
-<p>还是选择了闲鱼花30￥让手机起死回生，现在它又活了*^____^*。<br>
-为什么之前刷不进去呢？据闲鱼卖家说，刷入官方包的DA.bin文件需要验证，所以会卡红条。</p>
-<h1 id="can-kao-wen-xian">参考文献</h1>
-<p><a href="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-%28GSI%29-list">部分类原生GSI</a></p>
-<p><a href="https://www.bilibili.com/opus/990431050619420673">红米 note 10 pro 刷入 crDroid 9.17 GSI</a></p>
-<p><a href="https://www.bilibili.com/opus/624055294964199515">MTK（联发科）黑砖拯救（无法进入fastboot或recovery）</a></p>
-<p><a href="https://xdaforums.com/t/guide-how-to-properly-solve-the-errors-of-the-sp-flash-tool-for-merlin-redmi-note-9-redmi-10x-4g.4238161/">如何正确解决 SP FLASH TOOL for MERLIN 的错误</a></p>
-<p><a href="https://blog.csdn.net/codingnotes/article/details/78595500">通过SP_Flash_Tool线刷失败解决方法</a></p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>配置信息参见 <a href="https://detail.zol.com.cn/cell_phone/index1358240.shtml">https://detail.zol.com.cn/cell_phone/index1358240.shtml</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>N1盒子折腾小记</title>
     <url>/2025/02/09/N1%E7%9B%92%E5%AD%90%E6%8A%98%E8%85%BE%E5%B0%8F%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -173,6 +95,84 @@
       </tags>
   </entry>
   <entry>
+    <title>Root备忘录</title>
+    <url>/2024/11/08/Root%E5%A4%87%E5%BF%98%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="root-bei-wang-lu">root备忘录</h1>
+<h2 id="qian-yan" id="前言">前言</h2>
+<p>本人的手机于2022年2月7日购入，如今它的电池已经不耐操了，一天要两充到三充。可是它运行流畅（指流畅运行巨信），现在换机显得浪费我这个芯片了。那么，改一下系统调度会不会好一些呢🤔。好，来刷个机吧。</p>
+<p>以下记录了遇到的问题以备日后不时之需。</p>
+<h2 id="she-bei" id="设备">设备</h2>
+<ul>
+<li>Redmi Note 10 Pro<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
+</ul>
+<h2 id="root" id="root">root</h2>
+<p>用小米解锁工具解锁之后，第一次重启卡在了MIUI界面，想起来解锁前忘记打开“OEM解锁”了，吓得我一身冷汗😰。好在第二次重启成功了，没有变砖🥰。</p>
+<h2 id="guo-momo-jian-ce" id="过momo检测">过momo检测</h2>
+<p>我使用了kitsune mask作为root管理器，它本身提供了较强大的隐藏root的功能。隐藏root有白名单和黑名单两种模式。一般使用黑名单模式即可，不过勾选进黑名单的应用貌似无法启动，会卡白屏（测试了微信和momo两个应用），大概是我手机的玄学问题吧。白名单模式就没事了。</p>
+<p>开启隐藏前：<br>
+<img src="qian.webp" alt=""><br>
+开启隐藏后：<br>
+<img src="hou.webp" alt=""></p>
+<p>至于bootloader未锁定，可以通过刷safetynet fix模块来骗过momo，但不知道能不能骗过其他程序。</p>
+<h2 id="wei-xin-xiao-cheng-xu-wu-fa-da-kai" id="微信小程序无法打开">微信小程序无法打开</h2>
+<p>下载了Google play版微信，但发现小程序打不开😱，点小程序就卡在“正在加载”，难道是root的问题？瞎调一番后，偶然打开Google play，提示正在更新微信，更新完就能开小程序了😅。</p>
+<h2 id="wu-fa-lian-jie-wi-fi" id="无法连接WiFi">无法连接WiFi</h2>
+<p>打算连接舍友的手机热点，发现连不上，怎么点都显示“已保存”。几番调试，发现是无法连接WPA3-Personal加密的WiFi，其他加密方式可以连。但是之前我倒是可以连舍友WiFi。目前暂未找到解决方案。</p>
+<p><img src="wifi.webp" alt=""></p>
+<hr>
+<h1 id="lei-yuan-sheng-zhi-lu">类原生之旅</h1>
+<p>网上看到DSU Sideload这个软件.它利用了安卓自带的动态系统更新功能，但是可以自己分配动态系统的用户数据空间。也就是说，可以讲这个动态系统作为主力系统使用🤪。于是尝试了刷入CrDroid的GSI(通用系统镜像)。这可是人生中第一次用类原生当主力机器🥰。但是毕竟没经过适配，所以系统有Bug。</p>
+<p>CrDroid 9.X（安卓13） 版本下的bug：</p>
+<ul>
+<li>蓝牙断连</li>
+<li>5G环境下无法通话和收发短信</li>
+<li>无法使用杜比全景声</li>
+</ul>
+<p>CrDroid 10.X（安卓14） 版本下的bug：</p>
+<ul>
+<li>无法使用人脸识别</li>
+<li>仅使用了几天，测试不全</li>
+</ul>
+<p>刷上去之后，本以为可以回到一天一充的时代，但是貌似是我高估了类原生了。一天两充还是最低标准😥。看来就是硬件损耗了。</p>
+<p>用了一段时间，还是不能自适应这些bug，而且续航并没有提升。还是回去MIUI吧😅。</p>
+<p><s>为什么这一段没图呢？因为手机现在已经变砖了</s></p>
+<h1 id="yuan-ni-shua-ji-ban-sheng-gui-lai-gui-bu-lai-liao-a-a-a">愿你刷机半生，归来…归不来了啊啊啊</h1>
+<p>前文提到我使用的是动态系统。回去之前的MIUI14还是很顺利的。但是有一个说法：出厂系统就是最好的系统。于是决定刷回出厂的MIUI12.5.</p>
+<p>当然是选择最安全的Fastboot + miflash刷机大法。但在此之前，我萌生了个想法：何不把boot.img文件用magisk修补之后放回刷机包呢，这样就不用再次进Fastboot来root了🤪。</p>
+<p>经过漫长的等待，得到的是进度条的标红＞﹏＜，提示check boot_ab failed。看起来我偷梁换柱的计划露出鸡脚了。但是它还停留在Fastboot界面。</p>
+<p>好吧，已老实。刷原系统吧。这下总不会有问题吧，于是我安心地去刷牙了（此时是22：40）。</p>
+<p>事实证明，不要晚上刷机。刷完牙回来，天都塌了</p>
+<p>屏幕上鲜艳的红条直接让我心肺骤停（也是提示check xxx failed）。？？？，这还能报错？屏幕还黑了？尝试重新进入Fastboot…</p>
+<p>它没反应！！！而且电脑还一直有插入、拔出设备的提示音！看着计算机设备上的MediaTek device陷入了沉思，这是给我干进深度刷机里了？</p>
+<p>按照网上方法，使用SP Flash救砖。但是多次尝试，换了两个刷机包，仍然报错</p>
+<p><img src="dead.webp" alt=""></p>
+<p>已经23：45了，明天还要上课＞︿＜。当机立断，下单Redmi K80，以后再也不乱搞主力机了😭。<s>想不到我也有冲首发的一天</s></p>
+<hr>
+<p><s>我敬爱的Redmi Note 10 Pro同志Fastboot刷机失败，深度刷机抢救无效，于2024年11月28日逝世，享年2.8岁</s></p>
+<p>还是选择了闲鱼花30￥让手机起死回生，现在它又活了*^____^*。<br>
+为什么之前刷不进去呢？据闲鱼卖家说，刷入官方包的DA.bin文件需要验证，所以会卡红条。</p>
+<h1 id="can-kao-wen-xian">参考文献</h1>
+<p><a href="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-%28GSI%29-list">部分类原生GSI</a></p>
+<p><a href="https://www.bilibili.com/opus/990431050619420673">红米 note 10 pro 刷入 crDroid 9.17 GSI</a></p>
+<p><a href="https://www.bilibili.com/opus/624055294964199515">MTK（联发科）黑砖拯救（无法进入fastboot或recovery）</a></p>
+<p><a href="https://xdaforums.com/t/guide-how-to-properly-solve-the-errors-of-the-sp-flash-tool-for-merlin-redmi-note-9-redmi-10x-4g.4238161/">如何正确解决 SP FLASH TOOL for MERLIN 的错误</a></p>
+<p><a href="https://blog.csdn.net/codingnotes/article/details/78595500">通过SP_Flash_Tool线刷失败解决方法</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>配置信息参见 <a href="https://detail.zol.com.cn/cell_phone/index1358240.shtml">https://detail.zol.com.cn/cell_phone/index1358240.shtml</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你好，世界！</title>
     <url>/2024/05/20/hello_world/</url>
     <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
@@ -247,6 +247,37 @@ GND——GND</p>
       </tags>
   </entry>
   <entry>
+    <title>从《外剧》主题曲谈社会的变迁</title>
+    <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>作为一名标准的广东人，想必TA一定听过一段歌词：生仔未必就是福~~要娶媳妇要分屋~~</p>
+<p>这是中国内地集数最多的电视剧《外来媳妇本地郎》，自2000年11月开播，至今已有4000多集。由于其开播时间之长，集数之多，这部电视剧的主题曲响遍了整个广东地区，成为一代广东人的回忆。但就在几年前，这首自开播沿用的主题曲正式走入坟墓，因为《外来媳妇本地郎》采用了重制版主题曲。</p>
+<h1 id="shi-ting-huan-jie">试听环节</h1>
+<p>初版：</p>
+<audio controls height="100" width="100">
+  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/初版.mp3" type="audio/mpeg">
+</audio>
+<p>新版：</p>
+<audio controls height="100" width="100">
+  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/新版.mp3" type="audio/mpeg">
+</audio>
+<h1 id="yi-xie-xiang-fa">一些想法</h1>
+<p>初版主题曲使用镲、小提琴等乐器，体现了中西混合，开放包容的精神，与2000年代广东地区改革开放的精神相统一。对比与新版，初版的伴奏仅使用了简单的混音，乐器之间层次分明。镲的声音尖锐，体现了热烈、奔放的情感。小提琴的音调转折更少，听起来爽快、直率。我眼前仿佛展现了一幅画面：千禧年间，一个从乡里来的农村人，初搬入省城没多久，街道上来往的大众桑塔纳中混杂着三八大杠自行车，道路两旁西装革履的行人，大楼上印着XX日货的巨大广告牌，令他目不暇接。几年之后，他已经顺利地融入了城市里的生活。同城市人一样，他也西装白衬衫，脚踏着锃亮的皮鞋，自信从容、昂首挺胸地走在大街上。但是，城市几年间的生活并未洗脱他身上的乡土气息：身穿洋装，内心仍是那个宽厚大方、质朴、向他人毫无保留地展露内心想法的小伙，坚守着骆驼祥子般勤劳致富的淳朴乡土精神。</p>
+<p>从更大的角度来说，这也展现了当时改革开放不久，我国刚刚加入世界贸易的行列中的精神面貌。我们自信大方，内心又带有那个小伙的淳朴气息。</p>
+<p>新版的主题曲中，镲的部分被电子乐器取代，增加了鼓点，音调变得柔和。小提琴声音变得不那么突出，变得短促，同时增加了背景乐器，<s>整体听起来更像靡靡之音</s>。曾经的小伙已经完全失去了乡土气息，过上了灯红酒绿、纸醉金迷的小资生活（误）。新版的主题曲也展现了自信，不是那种初出茅庐，充满干劲的自信，而是功成名就之后的自信。</p>
+<h1 id="pian-tou-hua-mian">片头画面</h1>
+<p><img src="%E5%88%9D%E7%89%88.webp" alt="初版片头"></p>
+<p><img src="%E6%96%B0%E7%89%88.webp" alt="新版片头"></p>
+<p>在历代片头的变化中，我们得以窥见社会的变迁与发展。初版片头展现的是日出的广州城，紧接着是西关大院的古朴。新版片头则是广州夜晚的航拍画面。从片头的变化可见，城市发展得越来越好，但曾经那个烟火气息的西关大院已彻底从片头消失。我们是否可以从中感受到人文关怀的减少？</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为自己建立一个电影评分体系</title>
     <url>/2025/04/01/%E4%B8%BA%E8%87%AA%E5%B7%B1%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E7%94%B5%E5%BD%B1%E8%AF%84%E5%88%86%E4%BD%93%E7%B3%BB/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -301,33 +332,6 @@ GND——GND</p>
 <h1 id="can-kao-zi-liao">参考资料</h1>
 <p><a href="https://zhuanlan.zhihu.com/p/57668199">电影评分标准的简单设立</a></p>
 <p><a href="http://xindetihuiya.com/gaokao/news/1031909.html">高考语文作文评分标准及评分细则一览表</a></p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从《外剧》主题曲谈社会的变迁</title>
-    <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>作为一名标准的广东人，想必TA一定听过一段歌词：生仔未必就是福~~要娶媳妇要分屋~~</p>
-<p>这是中国内地集数最多的电视剧《外来媳妇本地郎》，自2000年11月开播，至今已有4000多集。由于其开播时间之长，集数之多，这部电视剧的主题曲响遍了整个广东地区，成为一代广东人的回忆。但就在几年前，这首自开播沿用的主题曲正式走入坟墓，因为《外来媳妇本地郎》采用了重制版主题曲。</p>
-<h1 id="shi-ting-huan-jie">试听环节</h1>
-<p>初版：</p>
-<p><audio src="/2025/04/12/从《外剧》主题曲谈社会的变迁/初版.mp3"></audio></p>
-<p>新版：</p>
-<p><audio src="/2025/04/12/从《外剧》主题曲谈社会的变迁/新版.mp3"></audio></p>
-<h1 id="yi-xie-xiang-fa">一些想法</h1>
-<p>初版主题曲使用镲、小提琴等乐器，体现了中西混合，开放包容的精神，与2000年代广东地区改革开放的精神相统一。对比与新版，初版的伴奏仅使用了简单的混音，乐器之间层次分明。镲的声音尖锐，体现了热烈、奔放的情感。小提琴的音调转折更少，听起来爽快、直率。我眼前仿佛展现了一幅画面：千禧年间，一个从乡里来的农村人，初搬入省城没多久，街道上来往的大众桑塔纳中混杂着三八大杠自行车，道路两旁西装革履的行人，大楼上印着XX日货的巨大广告牌，令他目不暇接。几年之后，他已经顺利地融入了城市里的生活。同城市人一样，他也西装白衬衫，脚踏着锃亮的皮鞋，自信从容、昂首挺胸地走在大街上。但是，城市几年间的生活并未洗脱他身上的乡土气息：身穿洋装，内心仍是那个宽厚大方、质朴、向他人毫无保留地展露内心想法的小伙，坚守着骆驼祥子般勤劳致富的淳朴乡土精神。</p>
-<p>从更大的角度来说，这也展现了当时改革开放不久，我国刚刚加入世界贸易的行列中的精神面貌。我们自信大方，内心又带有那个小伙的淳朴气息。</p>
-<p>新版的主题曲中，镲的部分被电子乐器取代，增加了鼓点，音调变得柔和。小提琴声音变得不那么突出，变得短促，同时增加了背景乐器，<s>整体听起来更像靡靡之音</s>。曾经的小伙已经完全失去了乡土气息，过上了灯红酒绿、纸醉金迷的小资生活（误）。新版的主题曲也展现了自信，不是那种初出茅庐，充满干劲的自信，而是功成名就之后的自信。</p>
-<h1 id="pian-tou-hua-mian">片头画面</h1>
-<p><img src="%E5%88%9D%E7%89%88.webp" alt="初版片头"></p>
-<p><img src="%E6%96%B0%E7%89%88.webp" alt="新版片头"></p>
-<p>在历代片头的变化中，我们得以窥见社会的变迁与发展。初版片头展现的是日出的广州城，紧接着是西关大院的古朴。新版片头则是广州夜晚的航拍画面。从片头的变化可见，城市发展得越来越好，但曾经那个烟火气息的西关大院已彻底从片头消失。我们是否可以从中感受到人文关怀的减少？</p>
 ]]></content>
       <categories>
         <category>杂谈</category>
@@ -1231,28 +1235,6 @@ Markdown原样显示是hexo-reference-plus（脚注插件）的问题，卸载�
       </tags>
   </entry>
   <entry>
-    <title>记录我的一天</title>
-    <url>/2024/09/16/%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E4%B8%80%E5%A4%A9/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="79fc11605817196c2222c8ed3b2f9be63b942cb99f6dc540ca75003cb499d7cc">bebb1f2ff1ec1cc48d3c2f806e4a231887d86715a93bc2d2a06b2128b1d5cc2f27f3277fd41a729fecb71907b1a02e656e72d5540a03b26b2a20bc6852192c3f5ad59981c75a0a4df8b3b3013f28b84c365adb77a345ccaa90cefcb171a3bca35dc116a8b30b43fb924ccf393be429f506ee943c2a6ff7428a20d60fa780c9f546c03b9dec93ff958852b5b77696d4a4a609c2927f703abe720e7bb50a7e23c1d56038f9098a69621c38fbb6cbfab5b56e337a5831a8de24710773d59bce04571bfccd39f7a63eebc427ef5a0bb05a3b572375cfb25e959222a9ebb68afcaae52d29f547d5f2d8fd01f53a4c8a7cd20d4a42d515a3664013970f749289631e738bcefbcb574d32be1b4586b754643cd02bc1e694d24b75f4a416d18a27a717ac48b38b2d937262c2def1538e2214be4f301d742dd073b47f9a076518930375ee74248de8456a8519d967a0c2df1c39396fec64153e86a90563a24e585667df6cb0b5230bebb976f270bac68b6dd229a4b1785c38a93973b74f5e34a42e2bd6451ad92fc349f19bc430c8f26dfb2b8990cd9102a9ab43910fd2f5cf897c71d3333c6b0b805892926986d6815a4d58f95d4fcd101298092ba0e2691f07d857b089239b4d798d989fe88d5b25e9b80f3bcdd575df8be6e4e1c0f6b40655d9f1c4aaf27703b7a9507f2637421126649729ed20dac6cf586d1ba025249b5e9806bba1f2b18f9ff368811dfbe749806f27c3059c8466db516d8681309435e9c039a2aa7b63e1dc7878032e27321780a58fdc1a5070e4ba2bcaae8f3cf5ba80e1fd747f08a016c248d2f01549292d0b22867d9eaa3bee5da7ac98f4a11ff7c72cb66b8a7ef8656d1354c1bbde1769ff0b40c8fd1bc7e4549bf2e2b5aed408ae6c02018ba3282f613e2f412744c0c40115a149d70cce456490f6afd03b07e6e40c02cfa7e2f3dfe058ca167a511d1273615515fe249933c807e88f282c6977d010e3fd168d69139011b6d46753402cea42a2b3b1ce093256df8a72f4ffdf9ad6bbb51ee15784cd3448f9e709e607e1847c4354f97b544aba1e9ba881eea17b55dca0aab8d9ccab304d001b1c815e0f9f3aefbb43a5d1d1490f1f9ec048fccaed9b4f2b5e6638e87aff679292bd07c4b66c7640188721dd72bf807e309d704291560ba9e9ddb9a6a04fadec953ab3060be6f612fea7f8cb785711ca685b6389b4eba5690969b15338b99b9585524cc2309ee0842d46ee8d8e614ee1d7b010633d04c477b20d23babfa6a1ee2d83d60e0b59bd043399f41284beb9454b755e6a83e6137d431c09486fc6c68c83d26009281bab6402f67b6c089f52f9c275040c14e6313ef383d54f8508439a3d6197aaa4306f6f8f7d6ce6c05bd0ec686b23129700dd29e648c9abe6a5eec4175a7db8374093877a0a57d341dea8bed2d628dd1abe4a92bf4c505ef6d69792ec95389f8d6b4c85dff2de22c67fa09361064e6dafe86906030d620c043941d45f47bea2c56ce431aa3a529de855379d9bdd7f35355c40c9905665561618c976e6d1bfa83a8e11a7fba3e102f888ba383c7710bef35f4e08c2c9348ff9257e8c3df9a8a166fa4bdad91b6ddad993498121bd5c32dd426ba0fb77180c1692b6bc116e8d04c539a8eb148de4d66d82b50cd96a16485a23054af3ffd3265e8414bfd588c803e712dccb353268c7aab2e3132f7a51e00b07224e850ed57469b4bf56e3cae830a3456fa95f60afa8a47d5db8b9b18f92663e6dfc1228ff145f89d441dd869e0db1d959230314c8285dac65296a3f152068508096f9bb4655cd2ff48750ae54ae171638980615f4643501654c4790bdc937e846721395b5557ee110525301f5d7b073557d905e31abde4e60abe6b7cc0dbc6deb751f4d1400343480c34ae69c4dde124495321227656c1c21eec914887765cdbcb2710d49cd64e06640017758adb8b5397615bfb500b2394f6f328b522b6a814997debd2cc78ae6fc0205051d85d2320c439cc953b865f16f3fe2da038e5f24a656bce04df7df6bea6375686f0906405573348db50fa657f986094cb68fd370063cd5c567d5c7533a1f06c39d458c18a255e0149d075c4e1ec027f1fde62a5e11e0587eb0d7c2a092a6bfd1df1c3e7752bf4b5596090fde040fbb774930777bf079288dbceeb631c6fc6fbbc14913f00dc4e5af7af2a6b32298555346e53bcb59740b28b3035638ef9a3af8f03c677837ff08c6987e13794cfbec3a553e1c85f0d100c3bff87bf97b8154c6d231f380bf4f3a55ae7ecc39eb3fe07feab9d69d537f15ea4fc1c88cc6864fea4da87bd66f0d3e3f29b59613ab9514dfd389c656892475c80c319670d7701eb93a55e879324ac991f958e9e19ec1b863017de634e164bcca27da73eddd761677d94602e85209a2fc0a9d16104fb1ed7ca0d210245f5b7938a5e60130b8ba926ea4f7893380b60e205c425bf595c761eb7fa4cad48428d6f9c3ce2b27328beab00af98998fc4b58db19941ae7ddb5e17c2686ab93d3e8a1b14dd42c337b9088db3535ba833c2119e009653cae36cf72be97d6644f9e2079f36394976d87baef89e89fabddcb0a0b11a6eafd8d90d243f20404db868e75d3202dc7caa78347c050e3c9abd2d3fabec44ab9a4dc62679a15fb7f2ccb758bc6b8c3dad0908d314aedcb1c2895415240ec830b022e96bd3b02610ce37ea299d706a332b72ce587911820057e6b2df83b87d6129ce51570d7c159bf5621ac3d6926ec2fe4a02a4569cd56a4543898a0b7ed7cf203c328ba0b241117b152639ab8bcd21544826076edb6fc26a2be8c51344c175eb1e6857b0d8f2fe01dad925b2005bf4931b305bdce17ad7c561a6946eddecf35b07d9c20c4ed1aed1a424b0b34fa658368d0b32ec9d00de708f326b0c811483b093a7bf6c810112d3fa2f82b795fbb0759549783ca6bc23ee01f32e066cb043bad6a7da17173ab2ec6d57a87613f7f35c12f5486c96cf413d1729e823bd51029e471ffd59da20ef517a6751a7148ee9cb3dcbf19dcfd165b61955e923c89da128a4c03d3550bf87619285f68694426c25a1b97ba4b10d9930abb276e34947fa4825fb248f003c92da4ff84f4c41b426d14fbfb5b575be9dc6eadeb5f79f3fb0285f08e9ff9af46d9503766af807d1ecd2f3b70e49174ef537965e6f16537ed513a8738710302997bebc1932467cc7d8d23e0ac873df9a0b6c021c3b089ac288f5061fe1fb0c64ecb27bbe14b2c96e901d42ce335fbe7d01ca3d4e890d3b16f0735f7ed2cc6fb5d0ac35f950bf5e037fe20af106ccfcdb521609effd0648150a1348c2c741d52dcba5b737f2989921b7e34c641ea5dd43262e09ee0d53dd64d67273c52b3867e058466351871d1a153f024ef7bb1ac709d3319c3684e85d75cafeca7b2ddd3b12ae0748915491addb8b54116aceda0543e4a4da6c54bf7ca89199218af0f0638de703b92c22ae36e57d4d6ccf8e54c11ffdb517b5862f36c781387e2d0b36ba0f4ccf7abd017cacfbb64514d8d0a7349ca898a6d1081125767a4a0bec4de20ab33ca6785ba1e46b66c51693cb7db7f95fd4748983483f300b5132bb28344e57a975c338f5eea7c1b592b3bf8b9829c4188448be7b63ddbd215059ee8b8ef35eac05ee181146acd4f1c813cb835859df989adb7baec1f907224630a025867d018175c3be0a66c55381c96599473eb77d4cc4957326c1ea8312cf39e4e5a21ad8c00e0afc15aedc4e923c74fa6e4d61d83bf2ba4d6c71c9f851868390caa9e2424c5d4d445fb86dec63d24485cbd0377a81e7ca1dfb2d8f43731d62c23ab18e122f4caebbd7e0a6072e26f4e6b68c5d79dcabed3cb21d743384f653a67b84cbeda3669cef5f2764b57936b2d926d7946d4b7cc4bfae87c1b34055696dda0b049d5db04fe29efa18bf0fffbf8bf480d75b87d286a4c3b1275ecdb151c368c2b47404848844881c12c4279c1801af80478e882460d50dca9b6ae8eac8d1d11cb16d6e704a4280f0b4d458b0467f14d8560be8fe6945406df8bab7cd1167157b827d5cc71038413c42a110e19e011a2948bd6da7d4633a20e0ea2c700ba3d3c2c4010b19ab92f1e3f1ce04ff56130d1cce801d28f94c9eced24d3c592a99825d0f6ffa685bf808b088a77e0c55bf75f86b20160fa8e4ceacb66814f1d2cf49f663cda6ddbafa8e9f9c7d2285ff5d8f7d379e86844bb94a5fb77d0195819bfc156869a371bee9d77d386d54353a9e41d4893eab3916d5da964b60125fc73cdf2710443643cb828520296ba2e9263fa37488162a83a3ca85d147d15662f252541d4643198c3d9a0630799e3a2ff2d07c0d270f10ed6c1b72bf1810ae46c8da44b8a49a69a7f32522bd12033345a7d14ef5eeaa08c6183b10e81f4335376ee2701b226fa30bfdbaa529aa48266695b00caf2b4f1b12f25090fa55bcfd769ade23bf13101e8dd92297387d0c9a40509cc4a058d06901b3c4cd05d2dc54949519a905b61141d370d908c1c7649b61652bdf8a53e7da96a47c2092b5c0ed546140df8ff482aece345ed635959a4b020d1efa9e7e534030dd150abaf4c8a532dec31e20a5395c781e574662dfdfa18f0dfecc12da391d7ef91bf4151f2e805d458e796ee7a7a46402c763613b0c1a971b1944f3c82c9da71fbe10fd7b7e699ed1d861944d0fb4a85f6a9175276a05ad374674c79589c338da93093c094e8bae23d55ed0c2a72ef82590159d4fde556687c1eb896cda880f4c90a75ab775596b6728d5dc3121662737ca14328ab64d4fa0903febfd8c3dbf047bfe86de479ed5cf32877a5d7ef39611855cab419becf993739a5ed09a65b07ff6fb67ea8892c5b0a45e2293df2a567f1d948f89fd1e390c8cec4cdf8228446eccdb23f7703855dfb7d97e4b7501dfdf3d186a6bf212f27d27041444c1d66329df447fac7cbdf1cbdb954c38493f593c5274e747c03eaa113103047bcb6b82e130da70fd2d4d239b19d080fd92a948b37849b10444ae4f272606ec69ae0956589f267025601f742cdc39314bcf3613ae67da235df9c14178514d4f511edb610b452bb624984128c73239090a758f3d51b65ab95036e6af943ade1af9ef4fe1c14b99ed99797eb9dc028a17ec4e47b12cc0991d3732aac94c19f8de921a0c2a546f321df88</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>英语六级备考指南</title>
     <url>/2025/02/17/%E8%8B%B1%E8%AF%AD%E5%85%AD%E7%BA%A7%E5%A4%87%E8%80%83%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<p>本文转载自知乎作者：跑步的人<br>
@@ -1330,6 +1312,28 @@ Markdown原样显示是hexo-reference-plus（脚注插件）的问题，卸载�
       </categories>
       <tags>
         <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录我的一天</title>
+    <url>/2024/09/16/%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E4%B8%80%E5%A4%A9/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="79fc11605817196c2222c8ed3b2f9be63b942cb99f6dc540ca75003cb499d7cc">bebb1f2ff1ec1cc48d3c2f806e4a231887d86715a93bc2d2a06b2128b1d5cc2f27f3277fd41a729fecb71907b1a02e656e72d5540a03b26b2a20bc6852192c3f5ad59981c75a0a4df8b3b3013f28b84c365adb77a345ccaa90cefcb171a3bca35dc116a8b30b43fb924ccf393be429f506ee943c2a6ff7428a20d60fa780c9f546c03b9dec93ff958852b5b77696d4a4a609c2927f703abe720e7bb50a7e23c1d56038f9098a69621c38fbb6cbfab5b56e337a5831a8de24710773d59bce04571bfccd39f7a63eebc427ef5a0bb05a3b572375cfb25e959222a9ebb68afcaae52d29f547d5f2d8fd01f53a4c8a7cd20d4a42d515a3664013970f749289631e738bcefbcb574d32be1b4586b754643cd02bc1e694d24b75f4a416d18a27a717ac48b38b2d937262c2def1538e2214be4f301d742dd073b47f9a076518930375ee74248de8456a8519d967a0c2df1c39396fec64153e86a90563a24e585667df6cb0b5230bebb976f270bac68b6dd229a4b1785c38a93973b74f5e34a42e2bd6451ad92fc349f19bc430c8f26dfb2b8990cd9102a9ab43910fd2f5cf897c71d3333c6b0b805892926986d6815a4d58f95d4fcd101298092ba0e2691f07d857b089239b4d798d989fe88d5b25e9b80f3bcdd575df8be6e4e1c0f6b40655d9f1c4aaf27703b7a9507f2637421126649729ed20dac6cf586d1ba025249b5e9806bba1f2b18f9ff368811dfbe749806f27c3059c8466db516d8681309435e9c039a2aa7b63e1dc7878032e27321780a58fdc1a5070e4ba2bcaae8f3cf5ba80e1fd747f08a016c248d2f01549292d0b22867d9eaa3bee5da7ac98f4a11ff7c72cb66b8a7ef8656d1354c1bbde1769ff0b40c8fd1bc7e4549bf2e2b5aed408ae6c02018ba3282f613e2f412744c0c40115a149d70cce456490f6afd03b07e6e40c02cfa7e2f3dfe058ca167a511d1273615515fe249933c807e88f282c6977d010e3fd168d69139011b6d46753402cea42a2b3b1ce093256df8a72f4ffdf9ad6bbb51ee15784cd3448f9e709e607e1847c4354f97b544aba1e9ba881eea17b55dca0aab8d9ccab304d001b1c815e0f9f3aefbb43a5d1d1490f1f9ec048fccaed9b4f2b5e6638e87aff679292bd07c4b66c7640188721dd72bf807e309d704291560ba9e9ddb9a6a04fadec953ab3060be6f612fea7f8cb785711ca685b6389b4eba5690969b15338b99b9585524cc2309ee0842d46ee8d8e614ee1d7b010633d04c477b20d23babfa6a1ee2d83d60e0b59bd043399f41284beb9454b755e6a83e6137d431c09486fc6c68c83d26009281bab6402f67b6c089f52f9c275040c14e6313ef383d54f8508439a3d6197aaa4306f6f8f7d6ce6c05bd0ec686b23129700dd29e648c9abe6a5eec4175a7db8374093877a0a57d341dea8bed2d628dd1abe4a92bf4c505ef6d69792ec95389f8d6b4c85dff2de22c67fa09361064e6dafe86906030d620c043941d45f47bea2c56ce431aa3a529de855379d9bdd7f35355c40c9905665561618c976e6d1bfa83a8e11a7fba3e102f888ba383c7710bef35f4e08c2c9348ff9257e8c3df9a8a166fa4bdad91b6ddad993498121bd5c32dd426ba0fb77180c1692b6bc116e8d04c539a8eb148de4d66d82b50cd96a16485a23054af3ffd3265e8414bfd588c803e712dccb353268c7aab2e3132f7a51e00b07224e850ed57469b4bf56e3cae830a3456fa95f60afa8a47d5db8b9b18f92663e6dfc1228ff145f89d441dd869e0db1d959230314c8285dac65296a3f152068508096f9bb4655cd2ff48750ae54ae171638980615f4643501654c4790bdc937e846721395b5557ee110525301f5d7b073557d905e31abde4e60abe6b7cc0dbc6deb751f4d1400343480c34ae69c4dde124495321227656c1c21eec914887765cdbcb2710d49cd64e06640017758adb8b5397615bfb500b2394f6f328b522b6a814997debd2cc78ae6fc0205051d85d2320c439cc953b865f16f3fe2da038e5f24a656bce04df7df6bea6375686f0906405573348db50fa657f986094cb68fd370063cd5c567d5c7533a1f06c39d458c18a255e0149d075c4e1ec027f1fde62a5e11e0587eb0d7c2a092a6bfd1df1c3e7752bf4b5596090fde040fbb774930777bf079288dbceeb631c6fc6fbbc14913f00dc4e5af7af2a6b32298555346e53bcb59740b28b3035638ef9a3af8f03c677837ff08c6987e13794cfbec3a553e1c85f0d100c3bff87bf97b8154c6d231f380bf4f3a55ae7ecc39eb3fe07feab9d69d537f15ea4fc1c88cc6864fea4da87bd66f0d3e3f29b59613ab9514dfd389c656892475c80c319670d7701eb93a55e879324ac991f958e9e19ec1b863017de634e164bcca27da73eddd761677d94602e85209a2fc0a9d16104fb1ed7ca0d210245f5b7938a5e60130b8ba926ea4f7893380b60e205c425bf595c761eb7fa4cad48428d6f9c3ce2b27328beab00af98998fc4b58db19941ae7ddb5e17c2686ab93d3e8a1b14dd42c337b9088db3535ba833c2119e009653cae36cf72be97d6644f9e2079f36394976d87baef89e89fabddcb0a0b11a6eafd8d90d243f20404db868e75d3202dc7caa78347c050e3c9abd2d3fabec44ab9a4dc62679a15fb7f2ccb758bc6b8c3dad0908d314aedcb1c2895415240ec830b022e96bd3b02610ce37ea299d706a332b72ce587911820057e6b2df83b87d6129ce51570d7c159bf5621ac3d6926ec2fe4a02a4569cd56a4543898a0b7ed7cf203c328ba0b241117b152639ab8bcd21544826076edb6fc26a2be8c51344c175eb1e6857b0d8f2fe01dad925b2005bf4931b305bdce17ad7c561a6946eddecf35b07d9c20c4ed1aed1a424b0b34fa658368d0b32ec9d00de708f326b0c811483b093a7bf6c810112d3fa2f82b795fbb0759549783ca6bc23ee01f32e066cb043bad6a7da17173ab2ec6d57a87613f7f35c12f5486c96cf413d1729e823bd51029e471ffd59da20ef517a6751a7148ee9cb3dcbf19dcfd165b61955e923c89da128a4c03d3550bf87619285f68694426c25a1b97ba4b10d9930abb276e34947fa4825fb248f003c92da4ff84f4c41b426d14fbfb5b575be9dc6eadeb5f79f3fb0285f08e9ff9af46d9503766af807d1ecd2f3b70e49174ef537965e6f16537ed513a8738710302997bebc1932467cc7d8d23e0ac873df9a0b6c021c3b089ac288f5061fe1fb0c64ecb27bbe14b2c96e901d42ce335fbe7d01ca3d4e890d3b16f0735f7ed2cc6fb5d0ac35f950bf5e037fe20af106ccfcdb521609effd0648150a1348c2c741d52dcba5b737f2989921b7e34c641ea5dd43262e09ee0d53dd64d67273c52b3867e058466351871d1a153f024ef7bb1ac709d3319c3684e85d75cafeca7b2ddd3b12ae0748915491addb8b54116aceda0543e4a4da6c54bf7ca89199218af0f0638de703b92c22ae36e57d4d6ccf8e54c11ffdb517b5862f36c781387e2d0b36ba0f4ccf7abd017cacfbb64514d8d0a7349ca898a6d1081125767a4a0bec4de20ab33ca6785ba1e46b66c51693cb7db7f95fd4748983483f300b5132bb28344e57a975c338f5eea7c1b592b3bf8b9829c4188448be7b63ddbd215059ee8b8ef35eac05ee181146acd4f1c813cb835859df989adb7baec1f907224630a025867d018175c3be0a66c55381c96599473eb77d4cc4957326c1ea8312cf39e4e5a21ad8c00e0afc15aedc4e923c74fa6e4d61d83bf2ba4d6c71c9f851868390caa9e2424c5d4d445fb86dec63d24485cbd0377a81e7ca1dfb2d8f43731d62c23ab18e122f4caebbd7e0a6072e26f4e6b68c5d79dcabed3cb21d743384f653a67b84cbeda3669cef5f2764b57936b2d926d7946d4b7cc4bfae87c1b34055696dda0b049d5db04fe29efa18bf0fffbf8bf480d75b87d286a4c3b1275ecdb151c368c2b47404848844881c12c4279c1801af80478e882460d50dca9b6ae8eac8d1d11cb16d6e704a4280f0b4d458b0467f14d8560be8fe6945406df8bab7cd1167157b827d5cc71038413c42a110e19e011a2948bd6da7d4633a20e0ea2c700ba3d3c2c4010b19ab92f1e3f1ce04ff56130d1cce801d28f94c9eced24d3c592a99825d0f6ffa685bf808b088a77e0c55bf75f86b20160fa8e4ceacb66814f1d2cf49f663cda6ddbafa8e9f9c7d2285ff5d8f7d379e86844bb94a5fb77d0195819bfc156869a371bee9d77d386d54353a9e41d4893eab3916d5da964b60125fc73cdf2710443643cb828520296ba2e9263fa37488162a83a3ca85d147d15662f252541d4643198c3d9a0630799e3a2ff2d07c0d270f10ed6c1b72bf1810ae46c8da44b8a49a69a7f32522bd12033345a7d14ef5eeaa08c6183b10e81f4335376ee2701b226fa30bfdbaa529aa48266695b00caf2b4f1b12f25090fa55bcfd769ade23bf13101e8dd92297387d0c9a40509cc4a058d06901b3c4cd05d2dc54949519a905b61141d370d908c1c7649b61652bdf8a53e7da96a47c2092b5c0ed546140df8ff482aece345ed635959a4b020d1efa9e7e534030dd150abaf4c8a532dec31e20a5395c781e574662dfdfa18f0dfecc12da391d7ef91bf4151f2e805d458e796ee7a7a46402c763613b0c1a971b1944f3c82c9da71fbe10fd7b7e699ed1d861944d0fb4a85f6a9175276a05ad374674c79589c338da93093c094e8bae23d55ed0c2a72ef82590159d4fde556687c1eb896cda880f4c90a75ab775596b6728d5dc3121662737ca14328ab64d4fa0903febfd8c3dbf047bfe86de479ed5cf32877a5d7ef39611855cab419becf993739a5ed09a65b07ff6fb67ea8892c5b0a45e2293df2a567f1d948f89fd1e390c8cec4cdf8228446eccdb23f7703855dfb7d97e4b7501dfdf3d186a6bf212f27d27041444c1d66329df447fac7cbdf1cbdb954c38493f593c5274e747c03eaa113103047bcb6b82e130da70fd2d4d239b19d080fd92a948b37849b10444ae4f272606ec69ae0956589f267025601f742cdc39314bcf3613ae67da235df9c14178514d4f511edb610b452bb624984128c73239090a758f3d51b65ab95036e6af943ade1af9ef4fe1c14b99ed99797eb9dc028a17ec4e47b12cc0991d3732aac94c19f8de921a0c2a546f321df88</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
       </tags>
   </entry>
 </search>
