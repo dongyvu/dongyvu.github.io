@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>git连接GitHub-ssh异常</title>
+    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
+<p><img src="1.webp" alt=""><br>
+<img src="2.webp" alt=""></p>
+<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
+<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
+<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
+<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
+<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
+<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>N1盒子折腾小记</title>
     <url>/2025/02/09/N1%E7%9B%92%E5%AD%90%E6%8A%98%E8%85%BE%E5%B0%8F%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -73,25 +95,62 @@
       </tags>
   </entry>
   <entry>
-    <title>git连接GitHub-ssh异常</title>
-    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
-<p><img src="1.webp" alt=""><br>
-<img src="2.webp" alt=""></p>
-<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
-<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
-<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
-<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
-<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
-<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
+    <title>香橙派的使用配置</title>
+    <url>/2024/05/22/orangepi-config/</url>
+    <content><![CDATA[<p>前些天购入了一个香橙派Zero3，但是时不时系统崩坏，（或许是sd卡不是香橙派官方店铺买的？）现在来捋一遍安装过程以便日后崩坏时重装系统。</p>
+<h1 id="ying-jian-zhun-bei">硬件准备</h1>
+<p>输出功率5V 2000mA以上适配器、USB Type-C数据线、USB 转 TTL 模块（串口模块）、读卡器、TF卡（Micro SD 卡）、杜邦线<br>
+<a href="https://www.wch.cn/download/CH341SER_EXE.html">串口驱动安装</a><br>
+接线：<br>
+TX——RX<br>
+RX——TX<br>
+GND——GND</p>
+<h1 id="xi-tong-gu-jian">系统固件</h1>
+<p>先<a href="http://www.orangepi.cn/html/serviceAndSupport/index.html">下载官方的固件</a></p>
+<h1 id="shao-lu-xi-tong">烧录系统</h1>
+<p>新SD卡要先格式化，我用了<a href="https://www.sdcardformatter.com/download/">SD Card Formatter</a></p>
+<p>用<a href="https://rufus.ie/zh/">refus</a>烧录进SD卡即可</p>
+<h1 id="yuan-cheng-guan-li-gong-ju">远程管理工具</h1>
+<p>可以在cmd或powershell里面输入命令来连接ssh<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh –p端口号 用户名@IP地址  #例如：ssh –p22 root@127.0.0.1</span><br></pre></td></tr></table></figure>
+<p>我使用了<a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a>来连接ssh</p>
+<h1 id="mi-ma">密码</h1>
+<h3 id="mo-ren-zhang-hu-orangepi" id="默认账户：orangepi">默认账户：orangepi</h3>
+<h3 id="mo-ren-root-zhang-hu-root" id="默认root账户：root">默认root账户：root</h3>
+<h3 id="mo-ren-mi-ma-orangepi" id="默认密码：orangepi">默认密码：orangepi</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#修改密码</span><br><span class="line">sudo passwd orangepi #orangepi为要修改的用户的名字，按提示修改即可</span><br></pre></td></tr></table></figure>
+<h1 id="pei-zhi-wang-luo">配置网络</h1>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmtui #图形界面配置网络</span><br></pre></td></tr></table></figure>
+<p>其他网络信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ifconfig #查看ip信息</span><br><span class="line">route -n #查看网关信息</span><br></pre></td></tr></table></figure>
+<p>ip地址可能会跳动，ssh连接会不方便，要进入nmtui设置静态ip</p>
+<h1 id="ruan-jian-yuan">软件源</h1>
+<p>香橙派官方系统已经配置好国内源了，国产派大法好，一般不用改软件源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.save #备份好习惯</span><br><span class="line">sudo cp /etc/apt/sources.list.save /etc/apt/sources.list #搞炸了用这条命令恢复</span><br><span class="line">nano /etc/apt/sources.list #编辑源</span><br></pre></td></tr></table></figure>
+<h1 id="geng-xin-xi-tong">更新系统</h1>
+<p>不更新，后期装软件会有各种奇怪的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade -y</span><br></pre></td></tr></table></figure>
+<h1 id="shi-qu">时区</h1>
+<p>香橙派连软件源都想好了，居然没调好时区（悲）<br>
+时间错误会导致某些网站证书验证问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">date #查看当前时间</span><br><span class="line">sudo tzselect #调整时区，看着按就行</span><br></pre></td></tr></table></figure>
+<h1 id="can-kao-wen-xian">参考文献</h1>
+<p><a href="https://zhuanlan.zhihu.com/p/658960791">OrangePi ZERO 2 新手配置教程</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://blog.csdn.net/wm609972715/article/details/83759114">Windows 下 cmd 窗口使用 ssh 命令</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>ssh</tag>
-        <tag>git</tag>
+        <tag>Linux</tag>
+        <tag>香橙派</tag>
+        <tag>单板机</tag>
       </tags>
   </entry>
   <entry>
@@ -185,96 +244,6 @@
       <tags>
         <tag>杂谈</tag>
         <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>香橙派的使用配置</title>
-    <url>/2024/05/22/orangepi-config/</url>
-    <content><![CDATA[<p>前些天购入了一个香橙派Zero3，但是时不时系统崩坏，（或许是sd卡不是香橙派官方店铺买的？）现在来捋一遍安装过程以便日后崩坏时重装系统。</p>
-<h1 id="ying-jian-zhun-bei">硬件准备</h1>
-<p>输出功率5V 2000mA以上适配器、USB Type-C数据线、USB 转 TTL 模块（串口模块）、读卡器、TF卡（Micro SD 卡）、杜邦线<br>
-<a href="https://www.wch.cn/download/CH341SER_EXE.html">串口驱动安装</a><br>
-接线：<br>
-TX——RX<br>
-RX——TX<br>
-GND——GND</p>
-<h1 id="xi-tong-gu-jian">系统固件</h1>
-<p>先<a href="http://www.orangepi.cn/html/serviceAndSupport/index.html">下载官方的固件</a></p>
-<h1 id="shao-lu-xi-tong">烧录系统</h1>
-<p>新SD卡要先格式化，我用了<a href="https://www.sdcardformatter.com/download/">SD Card Formatter</a></p>
-<p>用<a href="https://rufus.ie/zh/">refus</a>烧录进SD卡即可</p>
-<h1 id="yuan-cheng-guan-li-gong-ju">远程管理工具</h1>
-<p>可以在cmd或powershell里面输入命令来连接ssh<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh –p端口号 用户名@IP地址  #例如：ssh –p22 root@127.0.0.1</span><br></pre></td></tr></table></figure>
-<p>我使用了<a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a>来连接ssh</p>
-<h1 id="mi-ma">密码</h1>
-<h3 id="mo-ren-zhang-hu-orangepi" id="默认账户：orangepi">默认账户：orangepi</h3>
-<h3 id="mo-ren-root-zhang-hu-root" id="默认root账户：root">默认root账户：root</h3>
-<h3 id="mo-ren-mi-ma-orangepi" id="默认密码：orangepi">默认密码：orangepi</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#修改密码</span><br><span class="line">sudo passwd orangepi #orangepi为要修改的用户的名字，按提示修改即可</span><br></pre></td></tr></table></figure>
-<h1 id="pei-zhi-wang-luo">配置网络</h1>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmtui #图形界面配置网络</span><br></pre></td></tr></table></figure>
-<p>其他网络信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ifconfig #查看ip信息</span><br><span class="line">route -n #查看网关信息</span><br></pre></td></tr></table></figure>
-<p>ip地址可能会跳动，ssh连接会不方便，要进入nmtui设置静态ip</p>
-<h1 id="ruan-jian-yuan">软件源</h1>
-<p>香橙派官方系统已经配置好国内源了，国产派大法好，一般不用改软件源</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.save #备份好习惯</span><br><span class="line">sudo cp /etc/apt/sources.list.save /etc/apt/sources.list #搞炸了用这条命令恢复</span><br><span class="line">nano /etc/apt/sources.list #编辑源</span><br></pre></td></tr></table></figure>
-<h1 id="geng-xin-xi-tong">更新系统</h1>
-<p>不更新，后期装软件会有各种奇怪的问题</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade -y</span><br></pre></td></tr></table></figure>
-<h1 id="shi-qu">时区</h1>
-<p>香橙派连软件源都想好了，居然没调好时区（悲）<br>
-时间错误会导致某些网站证书验证问题</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">date #查看当前时间</span><br><span class="line">sudo tzselect #调整时区，看着按就行</span><br></pre></td></tr></table></figure>
-<h1 id="can-kao-wen-xian">参考文献</h1>
-<p><a href="https://zhuanlan.zhihu.com/p/658960791">OrangePi ZERO 2 新手配置教程</a></p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><a href="https://blog.csdn.net/wm609972715/article/details/83759114">Windows 下 cmd 窗口使用 ssh 命令</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>香橙派</tag>
-        <tag>单板机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从《外剧》主题曲谈社会的变迁</title>
-    <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>作为一名标准的广东人，想必TA一定听过一段歌词：生仔未必就是福~~要娶媳妇要分屋~~</p>
-<p>这是中国内地集数最多的电视剧《外来媳妇本地郎》，自2000年11月开播，至今已有4000多集。由于其开播时间之长，集数之多，这部电视剧的主题曲响遍了整个广东地区，成为一代广东人的回忆。但就在几年前，这首自开播沿用的主题曲正式走入坟墓，因为《外来媳妇本地郎》采用了重制版主题曲。</p>
-<h1 id="shi-ting-huan-jie">试听环节</h1>
-<p>初版：</p>
-<audio controls height="100" width="100">
-  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/初版.mp3" type="audio/mpeg">
-</audio>
-<p>新版：</p>
-<audio controls height="100" width="100">
-  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/新版.mp3" type="audio/mpeg">
-</audio>
-<h1 id="yi-xie-xiang-fa">一些想法</h1>
-<p>初版主题曲使用镲、小提琴等乐器，体现了中西混合，开放包容的精神，与2000年代广东地区改革开放的精神相统一。对比与新版，初版的伴奏仅使用了简单的混音，乐器之间层次分明。镲的声音尖锐，体现了热烈、奔放的情感。小提琴的音调转折更少，听起来爽快、直率。我眼前仿佛展现了一幅画面：千禧年间，一个从乡里来的农村人，初搬入省城没多久，街道上来往的大众桑塔纳中混杂着三八大杠自行车，道路两旁西装革履的行人，大楼上印着XX日货的巨大广告牌，令他目不暇接。几年之后，他已经顺利地融入了城市里的生活。同城市人一样，他也西装白衬衫，脚踏着锃亮的皮鞋，自信从容、昂首挺胸地走在大街上。但是，城市几年间的生活并未洗脱他身上的乡土气息：身穿洋装，内心仍是那个宽厚大方、质朴、向他人毫无保留地展露内心想法的小伙，坚守着骆驼祥子般勤劳致富的淳朴乡土精神。</p>
-<p>从更大的角度来说，这也展现了当时改革开放不久，我国刚刚加入世界贸易的行列中的精神面貌。我们自信大方，内心又带有那个小伙的淳朴气息。</p>
-<p>新版的主题曲中，镲的部分被电子乐器取代，增加了鼓点，音调变得柔和。小提琴声音变得不那么突出，变得短促，同时增加了背景乐器，<s>整体听起来更像靡靡之音</s>。曾经的小伙已经完全失去了乡土气息，过上了灯红酒绿、纸醉金迷的小资生活（误）。新版的主题曲也展现了自信，不是那种初出茅庐，充满干劲的自信，而是功成名就之后的自信。</p>
-<h1 id="pian-tou-hua-mian">片头画面</h1>
-<p><img src="%E5%88%9D%E7%89%88.webp" alt="初版片头"></p>
-<p><img src="%E6%96%B0%E7%89%88.webp" alt="新版片头"></p>
-<p>在历代片头的变化中，我们得以窥见社会的变迁与发展。初版片头展现的是日出的广州城，紧接着是西关大院的古朴。新版片头则是广州夜晚的航拍画面。从片头的变化可见，城市发展得越来越好，但曾经那个烟火气息的西关大院已彻底从片头消失。我们是否可以从中感受到人文关怀的减少？</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
       </tags>
   </entry>
   <entry>
@@ -438,6 +407,37 @@ GND——GND</p>
       </categories>
       <tags>
         <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从《外剧》主题曲谈社会的变迁</title>
+    <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>作为一名标准的广东人，想必TA一定听过一段歌词：生仔未必就是福~~要娶媳妇要分屋~~</p>
+<p>这是中国内地集数最多的电视剧《外来媳妇本地郎》，自2000年11月开播，至今已有4000多集。由于其开播时间之长，集数之多，这部电视剧的主题曲响遍了整个广东地区，成为一代广东人的回忆。但就在几年前，这首自开播沿用的主题曲正式走入坟墓，因为《外来媳妇本地郎》采用了重制版主题曲。</p>
+<h1 id="shi-ting-huan-jie">试听环节</h1>
+<p>初版：</p>
+<audio controls height="100" width="100">
+  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/初版.mp3" type="audio/mpeg">
+</audio>
+<p>新版：</p>
+<audio controls height="100" width="100">
+  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/新版.mp3" type="audio/mpeg">
+</audio>
+<h1 id="yi-xie-xiang-fa">一些想法</h1>
+<p>初版主题曲使用镲、小提琴等乐器，体现了中西混合，开放包容的精神，与2000年代广东地区改革开放的精神相统一。对比与新版，初版的伴奏仅使用了简单的混音，乐器之间层次分明。镲的声音尖锐，体现了热烈、奔放的情感。小提琴的音调转折更少，听起来爽快、直率。我眼前仿佛展现了一幅画面：千禧年间，一个从乡里来的农村人，初搬入省城没多久，街道上来往的大众桑塔纳中混杂着三八大杠自行车，道路两旁西装革履的行人，大楼上印着XX日货的巨大广告牌，令他目不暇接。几年之后，他已经顺利地融入了城市里的生活。同城市人一样，他也西装白衬衫，脚踏着锃亮的皮鞋，自信从容、昂首挺胸地走在大街上。但是，城市几年间的生活并未洗脱他身上的乡土气息：身穿洋装，内心仍是那个宽厚大方、质朴、向他人毫无保留地展露内心想法的小伙，坚守着骆驼祥子般勤劳致富的淳朴乡土精神。</p>
+<p>从更大的角度来说，这也展现了当时改革开放不久，我国刚刚加入世界贸易的行列中的精神面貌。我们自信大方，内心又带有那个小伙的淳朴气息。</p>
+<p>新版的主题曲中，镲的部分被电子乐器取代，增加了鼓点，音调变得柔和。小提琴声音变得不那么突出，变得短促，同时增加了背景乐器，<s>整体听起来更像靡靡之音</s>。曾经的小伙已经完全失去了乡土气息，过上了灯红酒绿、纸醉金迷的小资生活（误）。新版的主题曲也展现了自信，不是那种初出茅庐，充满干劲的自信，而是功成名就之后的自信。</p>
+<h1 id="pian-tou-hua-mian">片头画面</h1>
+<p><img src="%E5%88%9D%E7%89%88.webp" alt="初版片头"></p>
+<p><img src="%E6%96%B0%E7%89%88.webp" alt="新版片头"></p>
+<p>在历代片头的变化中，我们得以窥见社会的变迁与发展。初版片头展现的是日出的广州城，紧接着是西关大院的古朴。新版片头则是广州夜晚的航拍画面。从片头的变化可见，城市发展得越来越好，但曾经那个烟火气息的西关大院已彻底从片头消失。我们是否可以从中感受到人文关怀的减少？</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
       </tags>
   </entry>
   <entry>
@@ -616,7 +616,7 @@ GND——GND</p>
     <url>/2024/06/26/%E5%90%AC%E6%AD%8C%E9%9A%BE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="ting-ge-nan-ti">听歌难题</h1>
 <p>什么样的音乐平台最好？有很多版权，简洁美观的UI，较低的会员费。在我体验了好几家平台后发现，想集三点于一身就是在做梦😅。</p>
-<p>目前已体验过QQ音乐，网易云音乐，Spotify，Apple Music。当前正在使用Apple Music。</p>
+<p>目前已体验过QQ音乐，网易云音乐，Spotify，Apple Music。当前正在使用<s>Apple Music</s>网易云音乐。</p>
 <p>由于QQ音乐，酷狗音乐，酷我音乐版权共享，故下文以QQ音乐为代表，不再作区分。</p>
 <h1 id="ban-quan-dui-bi">版权对比</h1>
 <p>版权由多到少排序<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
@@ -649,6 +649,8 @@ GND——GND</p>
 <p>听同学说Apple Music不错，刚好又在闲鱼上看到1元的Apple Music会员，号称到期了可以重复拍。好奇试了试，反正被骗了也才一块钱。听第一耳时，居然顿感音质比Spotify好。 <s>我可是木耳。</s> Apple Music的歌词动画应该是全网最好的了，非常的好看。而且绝大多数歌都有歌词，不像Spotify的垃圾歌词支持。国区的版权并没有很少，至少我听的歌都有版权。Apple Music一直被人诟病的一点是日语歌曲名字混乱，罗马音、英文、假名都有。</p>
 <p>既然可以一直1元购，那为何不转Apple Music呢？于是，它成了我的主力软件，背叛了Spotify😜。</p>
 <p>后来，在闲鱼看到有些卖家描述：“账号已达试用上限的勿拍”，貌似不能一直一元购下去？于是选择家庭拼车，一个月也就3块多（如果不被骗的话）</p>
+<h2 id="wang-yi-yun-wo-cuo-liao" id="网易云，我错了😭">网易云，我错了😭</h2>
+<p>使用了近半年的Apple Music，发现它的推歌真是依托答辩，个人定制化歌单少，还不允许用户上传歌单，~~别给我整天推黑鬼说唱了😡。~~此外，外语歌曲没翻译也是一大痛点。当然，最重要的是价格问题。某鱼的网易云一年VIP仅需40多，Apple Music家庭拼车也能被一些贩子卖到40多，那为什么不选择网易云呢？还不用承担中途被踢下车的风险。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -1141,35 +1143,6 @@ ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
       </tags>
   </entry>
   <entry>
-    <title>给自己整一张万事达卡</title>
-    <url>/2025/01/04/%E7%BB%99%E8%87%AA%E5%B7%B1%E6%95%B4%E4%B8%80%E5%BC%A0%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>最近偶然在网上看到一篇文章</p>
-<p><a href="https://www.techxiaofei.com/post/finance/hsbc_online/">香港汇丰银行HSBC HK线上开户教程</a></p>
-<p>居然是万事达借记卡，而且是香港银行，最最关键的是————<s>大陆仔</s>内地人可用！！！太酷啦，哪个男孩不想拥有一张HK的外币种银行卡呢🤪</p>
-<p>不过话又说回来，什么是万事达卡？万事达卡(Mastercard)和Visa是世界上最大的两家发卡组织，银行卡上带有万事达标或Visa标的卡才支持外币结算。万事达卡和Visa卡也是在境外普遍认可的支付方式。<s>简直是Steam云上润人必备卡</s></p>
-<p>当然，我还是要肉身去一次香港的，这里只是前言，以后会持续更新我的开卡过程。</p>
-<h1 id="ban-li-gang-ao-tong-xing-zheng">办理港澳通行证</h1>
-<p>本人第一次办理港澳通行证，大体分为一下几步：</p>
-<ul>
-<li>在小程序“移民局12367”里预约办理港澳通行证，点击“办理通行证和签注”</li>
-<li>按照约定时间到达指定的出入境管理局</li>
-<li>询问前台工作人员，他让我填写出入境证件申请表（貌似有些地区直接使用预约时填写的资料，不用现场填表）</li>
-<li>到自助照相机拍照</li>
-<li>问前台工作人员拿号，等待叫号</li>
-<li>到号后，按照工作人员指引即可完成办理</li>
-</ul>
-<p>总共耗时30分钟左右，还是挺快的👍。若想知道更准确的办理流程，可以尝试在某红书搜索[你所在城市]+“港澳通行证办理”。</p>
-<p>7天之后，收到了邮政快递送来的通行证。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网站更换域名啦</title>
     <url>/2024/11/25/%E7%BD%91%E7%AB%99%E6%9B%B4%E6%8D%A2%E5%9F%9F%E5%90%8D%E5%95%A6/</url>
     <content><![CDATA[<p>近期看到了个新闻，说是io域名药丸😨<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，拖了近一个月，终于决定处理这件事了——换域名。不知道有没有用，但至少可以换个符合博客名字的域名啦🥰。</p>
@@ -1235,86 +1208,6 @@ Markdown原样显示是hexo-reference-plus（脚注插件）的问题，卸载�
       </tags>
   </entry>
   <entry>
-    <title>英语六级备考指南</title>
-    <url>/2025/02/17/%E8%8B%B1%E8%AF%AD%E5%85%AD%E7%BA%A7%E5%A4%87%E8%80%83%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<p>本文转载自知乎作者：跑步的人<br>
-<a href="https://zhuanlan.zhihu.com/p/441561052">https://zhuanlan.zhihu.com/p/441561052</a><br>
-作者微信公众号：跑步的人</p>
-<p>我对文章进行了精简</p>
-<hr>
-<p>备考优先级：听力&gt;阅读&gt;写作&gt;翻译。<br>
-<img src="https://picx.zhimg.com/v2-1c694ce2868954afa80130a9f118f621_1440w.jpg" alt=""></p>
-<h1 id="ci-hui">词汇</h1>
-<p>扔掉6000多个单词的单词书，先背重点高频词。背单词不要管拼写！知道意思就够了！写作文用的高级词汇单独分开背诵。</p>
-<p>需要优先记忆的是模糊的单词，而不是完全陌生的单词！</p>
-<p>如果你暂时来不及把所有的6级单词刷一遍，一定优先背高频！</p>
-<p>每一次做完题目，把模糊词的意思查一查写在旁边（不要专门摘抄到本子上），就标注在原文里，复习的时候还能结合一下原文的句子配合记忆。</p>
-<h1 id="ting-li">听力</h1>
-<h2 id="nei-gong" id="内功">内功</h2>
-<p>①泛听</p>
-<p>泛听不是走路听VOA和BBC，而是拿听力真题严格按照时间限制来做题，然后直接进入下一步。</p>
-<p>②精听</p>
-<p>一句一句的，把刚才做的那套听力题的全文再听一次！</p>
-<p>重点是，如果有句子没听出来没听明白，立刻暂停，然后在A4纸上潦草写出来这个句子里，自己听出来的几个单词，没听出来的地方就划横线。然后倒退回去再听，每倒退回去重复听一次，就可能多听出来几个单词。</p>
-<p>③复听</p>
-<p>到了这一步，你的面前现在要摆两样东西：A4纸（上面写了没听全的句子），以及听力原文。然后效果最好的地方来了：从头到尾，再次一句一句的听完。这一次听的时候，你再次碰到刚才没听懂的句子，基本还是听不懂，但是因为手边有听力原文，所以现在你要做的就是对照A4纸上的句子和听力原文的差别，看看自己为啥没听出来？是单词不认识还是出现了连读/弱读现象？把这些内容在听力原文上圈出来，连读/弱读的地方反复播放几次，让耳朵识别出来；模糊的单词记一下（注意：还是优先记忆模糊的单词，而不是完全的生词）。</p>
-<h2 id="ji-qiao" id="技巧">技巧</h2>
-<p>①顺序原则：这一点和4级相同，题目答案顺序与听力原文顺序一致。</p>
-<p>②开头原则不再适用：不同于4级，6级听力的前几句可能会包括答案，所以前几句也不能错过。</p>
-<p>③播音讲废话的时候，一定快速浏览选项，画出关键词，比如时间、地点、名字、特定名称、数字数据。</p>
-<p>④常见的同义替换，参见度盘</p>
-<h1 id="yue-du">阅读</h1>
-<p>题目顺序是SectionA选词填空→ SectionB匹配题→SectionC阅读单选，但按照题目难度排序，却刚好反过来，SectionC部分的分值最高（20%），题目最简单，在试卷里却被放在了阅读的最后面。</p>
-<p>所以，不管是考场还是平时练习，都一定按照CBA的顺序去做题！</p>
-<h2 id="section-c-yue-du-dan-xuan" id="SectionC阅读单选">SectionC阅读单选</h2>
-<p>KLA法则首先要求先看题目，再读文章</p>
-<p>①K（keyword，关键词）</p>
-<p>读题目的时候，圈出题目中的关键词，比如时间、地点、名字、特定名称、数字数据，这是唯一要做的事情。建议先圈出2~3到题目的关键词，然后直接去读文章，等到这个2~3题找到答案后，再继续读剩下的题目，继续圈关键词。</p>
-<p>②L（Locate，定位）</p>
-<p>根据上一步圈出的关键词，在原文对应的答题区域，锁定答案范围。</p>
-<p>注意啦，定位的时候一定要谨记：第二道题的答案在原文中的位置，一定在第一道题后面，以此类推，不会乱序的！</p>
-<p>③A（Analyze，分析）</p>
-<p>这个时候已经定位到了关键词所在的句子段落，需要做的就是：分析选项和原文的匹配程度！</p>
-<p>④额外注意</p>
-<p>难一点的题目，会存在同义替换的现象，题目中和原文中的关键词并不是同一个单词，但是意思却一致。</p>
-<h2 id="section-b-pi-pei" id="SectionB-匹配">SectionB 匹配</h2>
-<p>匹配题目同样适用KLA法则，但要更加注意选项中关键词和原文到底匹配了多少。</p>
-<p>如果选项和原文的某一处仅仅匹配了一两个词，那一定注意了，大概率是陷阱。</p>
-<p>你需要记住的原则只有一个：题目的多个关键词在原文中都可以匹配上，或者有同义替换，这就可以确定为正确答案。</p>
-<h2 id="section-a-xuan-ci-tian-kong" id="SectionA-选词填空">SectionA 选词填空</h2>
-<p>难度高、分值低，备考时间有限的情况下，优先准备听其他题型。如果考场时间不够，这道题甚至可以战术放弃，</p>
-<p>①不要从头到尾看文章，直接从第一个空那里开始看，判定一下这个空缺少的单词是什么类型，n/v/adj/adv；</p>
-<p>②涉及n/v的比较简单，去题目给出的备选单词里扫一眼，哪个最贴近就填哪个；</p>
-<p>③注意，n/v一般会出现变种，比如n要换成复数，v要换成第三人称单数；</p>
-<p>④adj/adv稍微复杂点，也会出现变种，比如题目给的adj，但其实原文缺少的是adv；</p>
-<p>⑤如果你觉得有的词好像填在两个空上都合适，千万别纠结，两个空都填这个词。</p>
-<h1 id="zuo-wen">作文</h1>
-<p>作文考察的根本不是思辨能力，而是模仿能力，说白了就是套用/修改牛逼句子和作文模板的能力。</p>
-<h2 id="bei-ju-zi" id="背句子">背句子</h2>
-<p>句子模板参见度盘。</p>
-<h2 id="xie-jie-gou-bu-yong-xie-quan-wen" id="写结构，不用写全文">写结构，不用写全文</h2>
-<p>你只需要花3分钟构思主题，7分钟在脑子里组织，比如说用哪个万能句子？套用哪个作文模板？文章开头用哪个背过的句子？结尾用什么模板？</p>
-<p>这个过程中，大脑不断的调用自己背过的句子，你就在A4纸上潦草的写下自己反应，之后，每个句子就只写个开头都行。</p>
-<p>（前提是已经背了模板，要不然会眼高手低的）</p>
-<p>时间紧张的同学，千万不要每个话题都去背准备相关的素材去背，效率太低了！把这些时间去记一下通用的模板句子，考场上根据主题换一下关键单词就OK啦！</p>
-<h1 id="fan-yi">翻译</h1>
-<p>哪怕有很多语言错误，其中一部分甚至是严重的错误，但只要“勉强表达”了原文意思，就是7-9分，这已经是拿了一大半的分数了。</p>
-<p>①翻译是人工阅卷，阅卷老师根本不可能看你全文的，得多少分，重点是有没有写对踩分点的单词，以及语法错误多不多；</p>
-<p>②一定要选择基础的单词和简单句式，越基础越好，不犯错就是得分；</p>
-<p>③踩分，翻译是有关键踩分点的，通常这个题目主题下的相关词汇，比如历史，文化、经济、社会类等，这个需要单独记一下。词汇参见度盘。</p>
-<p>④评分标准里说了，“勉强表达”了原文意思就ok，所以碰见不知道怎么表达的句子，想方设法把原文“意译”，而不是“直译”，总之千万不要空着~</p>
-<h1 id="du-pan-lian-jie">度盘链接</h1>
-<p><a href="https://pan.baidu.com/s/1ekZlYtxCxQCp2SIlSevfZg?pwd=ptkk">https://pan.baidu.com/s/1ekZlYtxCxQCp2SIlSevfZg?pwd=ptkk</a></p>
-<p>链接如果挂了请移步原作者公众号：跑步的人</p>
-]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记录我的一天</title>
     <url>/2024/09/16/%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E4%B8%80%E5%A4%A9/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">
@@ -1334,6 +1227,109 @@ Markdown原样显示是hexo-reference-plus（脚注插件）的问题，卸载�
       </categories>
       <tags>
         <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>香港之旅</title>
+    <url>/2025/06/09/%E9%A6%99%E6%B8%AF%E4%B9%8B%E6%97%85/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>为什么去香港，因为最近偶然在网上看到一篇文章</p>
+<p><a href="https://www.techxiaofei.com/post/finance/hsbc_online/">香港汇丰银行HSBC HK线上开户教程</a></p>
+<p>居然是万事达借记卡，而且是香港银行，最最关键的是————<s>大陆仔</s>内地人可申请！！！太酷啦，哪个男孩不想拥有一张HK的外币种银行卡呢🤪</p>
+<p>科普：什么是万事达卡？万事达卡(Mastercard)和Visa是世界上最大的两家发卡组织，银行卡上带有万事达标或Visa标的卡才支持外币结算。万事达卡和Visa卡也是在境外普遍认可的支付方式。<s>简直是Steam云上润人必备卡</s></p>
+<p>开卡需要我肉身去一次香港，于是萌生了香港之旅的念头。</p>
+<h1 id="ban-li-gang-ao-tong-xing-zheng">办理港澳通行证</h1>
+<p>本人第一次办理港澳通行证，大体分为一下几步：</p>
+<ul>
+<li>在小程序“移民局12367”里预约办理港澳通行证，点击“办理通行证和签注”</li>
+<li>按照约定时间到达指定的出入境管理局</li>
+<li>询问前台工作人员，他让我填写出入境证件申请表（貌似有些地区直接使用预约时填写的资料，不用现场填表）</li>
+<li>到自助照相机拍照</li>
+<li>问前台工作人员拿号，等待叫号</li>
+<li>到号后，按照工作人员指引即可完成办理</li>
+</ul>
+<p>总共耗时30分钟左右，还是挺快的👍。若想知道更准确的办理流程，可以尝试在某红书搜索[你所在城市]+“港澳通行证办理”。</p>
+<p>7天之后，收到了邮政快递送来的通行证。</p>
+<h1 id="qian-wang-shen-zhen">前往深圳</h1>
+<p>坐大巴，抵达深圳。先在深圳住一晚，第二天一早再从口岸进香港，这样可以有更多时间感受一下香港这座城市。<s>如果你刚好财力雄厚，可以直接坐高铁到香港西九龙并在香港住</s></p>
+<p>这是我第二次踏入深圳这座城市。走在福田的街道上，两旁的楼房，街道的柏油马路，似乎都与其他城市别无二致。唯有路上的“粤B”车牌才能彰显出：这里是深圳。</p>
+<p>那么，去吃午饭吧。持着“性价比旅游”的想法，我和同伴们绕过装横豪华的各种餐厅，目不斜视地走到商场三楼的萨莉亚😋。每人点了份披萨，外加一盘小吃。在橘黄的灯下，被烤的滋滋作响的披萨发出诱人的烤肉味。从桌旁的小抽屉掏出叉子，叉一根小香肠送入口中。嗯，熟悉的预制香肠味，但也足以扫除旅行的疲倦，坐那破大巴真是累死我了。</p>
+<h2 id="min-su" id="民宿">民宿</h2>
+<p>住进民宿。在携程上预定，30多一晚，相当便宜。房东把一间老破小重新装修，每个房间都放了木制双层床，与住宿舍别无二致。<s>这床甚至比我学校的好。</s> 刚进门，屋子里空无一人。大门对面就是一条通道，两旁是房间，标准的住宅布局。通道尽头挂着装饰画，墙面很白很平整，房东似乎并不吝啬审美情趣。门口的左右两旁本应是客厅和餐厅，但客厅已放了好几张木制双层床，而在餐厅放着黑色小沙发。虽然有阳台，但是屋子的采光并不好，没开灯就显得很昏暗。走进房间，里面好几张双层床，俨然是宿舍风。一哥们儿坐在床上玩手机，他是我们在这间屋子见到的第一个住户。房间没开灯，一片寂静，有一张床的床帘紧闭，应该是有人在睡觉。</p>
+<p>“住这儿的人素质挺好，至少会兼顾睡觉的人”，这是我当时的第一反应。</p>
+<p>住在这儿的，都是些什么样的人？吃过晚饭回来，屋子里已经开了灯，有两人坐在沙发上，分别穿着美团和顺丰的衣服。他们玩手机，外放，但至少没有把音量拉到最大。住在这儿的，大概就是像他们这样的人吧。他们是较底层的人，付不起大城市高昂的租金，蜗居于此。右边的“客厅”传来窃窃私语声，床上坐着另外两人，听不大他们在聊什么。整间屋子几乎全天都保持安静，大概是防止吵到某个人睡觉吧。他们来自底层，但他们也坚守着基本道德。</p>
+<p>我觉得，他们是孤独的人。住在民宿里，只有床上的一片天地完全属于自己。屋子里的人搬进来，又搬出去，住在身旁的人不断更换，没有一个知心的人。白天在街头独自奔走，晚上回到屋子里只有手机作伴，第二天再上街奔走。每天遵循相同的模式，为的就是在城市里混口饭吃。晚上12点，我躺在床上。透过长满铁锈的细长防盗网往窗外看，是惨败的路灯，杂夹着窗外空调水滴落在铁皮上的滴滴答答声，怎能不让人怀念儿时的夜雨呢？漂泊之人，何时还乡？</p>
+<h1 id="qian-wang-xiang-gang">前往香港</h1>
+<p>清早起来，搭乘地铁，来到福田口岸。</p>
+<p><img src="%E5%8F%A3%E5%B2%B8.webp" alt=""></p>
+<p>刷港澳通行证，出内地海关后，是一条很长的桥，正上方写着“欢迎莅临香港”</p>
+<p><img src="%E6%A1%A5.webp" alt=""></p>
+<p>通过香港海关，就正式进入了香港的土地。这片土地，曾孕育出无数经典的电影作品，如今，我走进了电影里，来到了旺角。走出地铁，就听到《光辉岁月》的歌声，对味了！那是一个地铁旁卖唱的人，拿着麦克风，唱着这首经典老歌。香港近些年几乎没有什么经典文艺作品，港人记得的，还是那个香港辉煌的年代。或许，这就是卖唱的人选择这首歌的原因。可惜，忘记拍照了😅。</p>
+<p>抢铁名不虚传，从首发站坐地铁，起步就几十港币了😡。</p>
+<p><s>提起旺角，还想起《旺角卡门》：穿西装打tie，抓大哥电话有乜嘢用啊？</s></p>
+<h2 id="jie-tou" id="街头">街头</h2>
+<p>旺角是香港的市中心，大多数游客都往这里跑。所以路上随处可听到普通话。来之前听说香港习惯靠左走，而内地习惯靠右走。但走在旺角的街头，除了路上的汽车，行人几乎全都靠右走，这就是内地人的力量😅。</p>
+<p>走到街的尽头，一阵嗒嗒嗒的声音由远及近，这是红绿灯的提示音。香港的无障碍服务做得很好，所有的红路灯都配上了提示音，而且贼大声。旺角人多，香港红路灯普遍绿灯短暂，斑马线上奔走的人群，加上催命似的哒哒声，成为了香港快节奏的标志。</p>
+<p><img src="%E8%A1%97%E5%A4%B41.webp" alt=""><br>
+<img src="%E8%A1%97%E5%A4%B42.webp" alt=""><br>
+<img src="%E8%A1%97%E5%A4%B43.webp" alt=""></p>
+<p>嚯，姜涛是谁？居然有人买下巨大广告牌庆生。查了一下，和我们坤哥一样，搞饭圈的。想不到香港也搞这一套😅。<s>据说他“火不过罗湖”，我确实第一次听闻这个人。</s></p>
+<p><img src="%E5%A7%9C%E6%B6%9B.webp" alt=""></p>
+<h2 id="sai-ma-hui" id="赛马会">赛马会</h2>
+<p>路边看到了赛马会投注店面，看上去像是香港官方指定投注点。走进去，看到很多大爷大妈盯着屏幕，手上拿着小纸条。但他们不像香港电影那样，比赛结果出来后，纸条随意丢地上。</p>
+<p><img src="%E8%B5%9B%E9%A9%AC%E4%BC%9A.webp" alt=""></p>
+<p>香港赛马始于1844年，由英国殖民者引入。最早只有英国精英才可参加赛马，华人到20世纪初才逐步参与。除了赛马，除了赛马，香港允许的博彩业还有足球和六合彩。六合彩就是猜数字，也是由香港赛马会运营。到了晚上，翡翠台会直播搅珠，搅出六个数字，猜对越多赢得钱越多。这个风潮也在内地盛极一时，曾经有很多内地非法投注点代为购买六合彩。听闻很多六合彩谜语人念叨什么生肖，但也不见得有多少人靠着生肖谜语赢了大钱。</p>
+<p>赛马会作为唯一合法博彩机构，也经营足球博彩业务。那天不是赛马日，里面电视屏幕播的是足球比赛，那些大爷大妈大概是在赌球吧。想起小的时候，家里看翡翠台。大概是早上，翡翠台总是会重播赛马比赛。不谙世事的我觉得，这么无聊的东西怎么会有人看？牵扯到赌博，连六合彩这种猜数字游戏都被人们津津乐道，更何况是体育项目呢。</p>
+<p>中午，吃肯德基！比起50HKD一份的猪脚饭，肯德基已经是最性价比的餐厅了。在吃饭的间隙，完成了中银香港和汇丰银行的开户。</p>
+<h2 id="kai-hu" id="开户">开户</h2>
+<p>中银香港、汇丰银行目前均支持线上开户，具体图文步骤参考小红书即可。这里列出一些我遇到的坑。</p>
+<ul>
+<li>
+<p>汇丰银行：</p>
+<ul>
+<li>不必连接当地wifi，手机漫游流量也可以开户，不过IP必须是香港。</li>
+<li>开户过程中不可退出应用，包括切屏、开小窗，所以建议提前下载好出入境证明，并记录好自己的中英文住址。</li>
+<li>牢记用户名、密码，实在不行拿记事本记着，因为登录需要你的用户名。</li>
+<li>在填写完所有资料后，一定要点“开通手机银行”，千万不要退出去。</li>
+<li>红狮子卡开户后会自动寄出，蓝狮子卡（也就是万事达卡）需要手动点一下申请。二者均发EMS特快，过几天去中国邮政官网查快递即可。</li>
+</ul>
+</li>
+<li>
+<p>中银香港</p>
+<ul>
+<li>不可使用手机漫游流量，可以连当地wifi，也可以用同伴的手机热点（同样要求香港IP）。</li>
+<li>不要切屏。</li>
+<li>拍摄证件硬控我几十分钟，证件总反光，这里需要一颗平静的心。</li>
+<li>需要牢记用户名、密码。</li>
+<li>万事达卡需要手动申请，中银卡自动寄出。二者都是平邮（无单号可查），建议找客服要求寄挂号信（有单号可查）。</li>
+</ul>
+</li>
+</ul>
+<p>吃饭用的是现金，发现香港钞票原来可以由多家银行发行！图案样式不一，豪康🥰。查阅了一下，香港的钞票机制是这样的：</p>
+<ul>
+<li>三家发钞银行：汇丰银行、渣打银行和中国银行（香港）负责发行20元及以上面额的纸币。发钞时需按 7.80港元兑1美元 的固定汇率向金管局缴纳等值美元，换取无息的负债证明书作为发行支持。</li>
+<li>10元纸币与硬币：由金管局直接发行（如紫色塑胶10元钞），硬币则由政府统一发行。</li>
+</ul>
+<h2 id="wei-duo-li-ya-gang" id="维多利亚港">维多利亚港</h2>
+<p>酒足饭饱，乘上所处可见的双层巴士，来到紫金花广场，对面就是维多利亚港。本来的设想是：在晚上登上太平山顶，俯瞰维多利亚港，说上一句：“晚上好，夜之城！”可惜那天是阴天，而且晚上要赶回学校，没去爬太平山。</p>
+<p><img src="%E7%BB%B4%E5%A4%9A%E5%88%A9%E4%BA%9A%E6%B9%BE1.webp" alt=""><br>
+<img src="%E7%BB%B4%E5%A4%9A%E5%88%A9%E4%BA%9A%E6%B9%BE2.webp" alt=""></p>
+<p>晚餐在茶餐厅里吃。那家茶餐厅开在西九龙高铁站旁边的商场里，服务态度友好。<s>可惜感受不到网传的歧视性服务业了。</s> 点了叉烧饭，加上一杯港式奶茶，花费58HKD。港式奶茶确实不同于内陆，保留了茶水本来的味道。<s>感觉像茶水里挤了一些蒙牛润色。</s> 附送了两包糖，顾客要是想喝甜的，可以自己加进去。我把糖全倒了进去，几乎没有变甜，真是怪事😔。全世界的快餐味道都差不多，香港的叉烧饭也不例外。</p>
+<p>晚饭过后，走去高铁站的路上，眼前赫然出现夜幕下的维多利亚港。</p>
+<p><img src="%E5%A4%9C%E5%B9%95%E4%B8%8B%E7%9A%84%E7%BB%B4%E5%A4%9A%E5%88%A9%E4%BA%9A%E6%B9%BE.webp" alt=""></p>
+<p>“晚上好，夜之城！”</p>
+<p>嗯，也算圆了一半的梦吧。在辉煌的日子里，香港就是一代人心中的夜之城。</p>
+<blockquote>
+<p>在夜之城，撑死胆大的，饿死胆小的！<br>
+你知道最有名的人都在哪里么？哈，在坟墓里！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>游记</tag>
       </tags>
   </entry>
 </search>
