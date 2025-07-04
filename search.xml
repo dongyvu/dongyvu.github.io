@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>git连接GitHub-ssh异常</title>
-    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
-<p><img src="1.webp" alt=""><br>
-<img src="2.webp" alt=""></p>
-<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
-<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
-<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
-<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
-<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
-<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>N1盒子折腾小记</title>
     <url>/2025/02/09/N1%E7%9B%92%E5%AD%90%E6%8A%98%E8%85%BE%E5%B0%8F%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -95,62 +73,40 @@
       </tags>
   </entry>
   <entry>
-    <title>香橙派的使用配置</title>
-    <url>/2024/05/22/orangepi-config/</url>
-    <content><![CDATA[<p>前些天购入了一个香橙派Zero3，但是时不时系统崩坏，（或许是sd卡不是香橙派官方店铺买的？）现在来捋一遍安装过程以便日后崩坏时重装系统。</p>
-<h1 id="ying-jian-zhun-bei">硬件准备</h1>
-<p>输出功率5V 2000mA以上适配器、USB Type-C数据线、USB 转 TTL 模块（串口模块）、读卡器、TF卡（Micro SD 卡）、杜邦线<br>
-<a href="https://www.wch.cn/download/CH341SER_EXE.html">串口驱动安装</a><br>
-接线：<br>
-TX——RX<br>
-RX——TX<br>
-GND——GND</p>
-<h1 id="xi-tong-gu-jian">系统固件</h1>
-<p>先<a href="http://www.orangepi.cn/html/serviceAndSupport/index.html">下载官方的固件</a></p>
-<h1 id="shao-lu-xi-tong">烧录系统</h1>
-<p>新SD卡要先格式化，我用了<a href="https://www.sdcardformatter.com/download/">SD Card Formatter</a></p>
-<p>用<a href="https://rufus.ie/zh/">refus</a>烧录进SD卡即可</p>
-<h1 id="yuan-cheng-guan-li-gong-ju">远程管理工具</h1>
-<p>可以在cmd或powershell里面输入命令来连接ssh<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh –p端口号 用户名@IP地址  #例如：ssh –p22 root@127.0.0.1</span><br></pre></td></tr></table></figure>
-<p>我使用了<a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a>来连接ssh</p>
-<h1 id="mi-ma">密码</h1>
-<h3 id="mo-ren-zhang-hu-orangepi" id="默认账户：orangepi">默认账户：orangepi</h3>
-<h3 id="mo-ren-root-zhang-hu-root" id="默认root账户：root">默认root账户：root</h3>
-<h3 id="mo-ren-mi-ma-orangepi" id="默认密码：orangepi">默认密码：orangepi</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#修改密码</span><br><span class="line">sudo passwd orangepi #orangepi为要修改的用户的名字，按提示修改即可</span><br></pre></td></tr></table></figure>
-<h1 id="pei-zhi-wang-luo">配置网络</h1>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmtui #图形界面配置网络</span><br></pre></td></tr></table></figure>
-<p>其他网络信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ifconfig #查看ip信息</span><br><span class="line">route -n #查看网关信息</span><br></pre></td></tr></table></figure>
-<p>ip地址可能会跳动，ssh连接会不方便，要进入nmtui设置静态ip</p>
-<h1 id="ruan-jian-yuan">软件源</h1>
-<p>香橙派官方系统已经配置好国内源了，国产派大法好，一般不用改软件源</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.save #备份好习惯</span><br><span class="line">sudo cp /etc/apt/sources.list.save /etc/apt/sources.list #搞炸了用这条命令恢复</span><br><span class="line">nano /etc/apt/sources.list #编辑源</span><br></pre></td></tr></table></figure>
-<h1 id="geng-xin-xi-tong">更新系统</h1>
-<p>不更新，后期装软件会有各种奇怪的问题</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade -y</span><br></pre></td></tr></table></figure>
-<h1 id="shi-qu">时区</h1>
-<p>香橙派连软件源都想好了，居然没调好时区（悲）<br>
-时间错误会导致某些网站证书验证问题</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">date #查看当前时间</span><br><span class="line">sudo tzselect #调整时区，看着按就行</span><br></pre></td></tr></table></figure>
-<h1 id="can-kao-wen-xian">参考文献</h1>
-<p><a href="https://zhuanlan.zhihu.com/p/658960791">OrangePi ZERO 2 新手配置教程</a></p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><a href="https://blog.csdn.net/wm609972715/article/details/83759114">Windows 下 cmd 窗口使用 ssh 命令</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
+    <title>git连接GitHub-ssh异常</title>
+    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
+<p><img src="1.webp" alt=""><br>
+<img src="2.webp" alt=""></p>
+<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
+<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
+<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
+<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
+<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
+<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
-        <tag>香橙派</tag>
-        <tag>单板机</tag>
+        <tag>ssh</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你好，世界！</title>
+    <url>/2024/05/20/hello_world/</url>
+    <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
+<hr>
+<p>感谢友人<a href="https://yuuu.org/">竹月</a>，他在我建站时不费余力地解答我的疑惑。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -232,18 +188,62 @@ GND——GND</p>
       </tags>
   </entry>
   <entry>
-    <title>你好，世界！</title>
-    <url>/2024/05/20/hello_world/</url>
-    <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
-<hr>
-<p>感谢友人<a href="https://yuuu.org/">竹月</a>，他在我建站时不费余力地解答我的疑惑。</p>
+    <title>香橙派的使用配置</title>
+    <url>/2024/05/22/orangepi-config/</url>
+    <content><![CDATA[<p>前些天购入了一个香橙派Zero3，但是时不时系统崩坏，（或许是sd卡不是香橙派官方店铺买的？）现在来捋一遍安装过程以便日后崩坏时重装系统。</p>
+<h1 id="ying-jian-zhun-bei">硬件准备</h1>
+<p>输出功率5V 2000mA以上适配器、USB Type-C数据线、USB 转 TTL 模块（串口模块）、读卡器、TF卡（Micro SD 卡）、杜邦线<br>
+<a href="https://www.wch.cn/download/CH341SER_EXE.html">串口驱动安装</a><br>
+接线：<br>
+TX——RX<br>
+RX——TX<br>
+GND——GND</p>
+<h1 id="xi-tong-gu-jian">系统固件</h1>
+<p>先<a href="http://www.orangepi.cn/html/serviceAndSupport/index.html">下载官方的固件</a></p>
+<h1 id="shao-lu-xi-tong">烧录系统</h1>
+<p>新SD卡要先格式化，我用了<a href="https://www.sdcardformatter.com/download/">SD Card Formatter</a></p>
+<p>用<a href="https://rufus.ie/zh/">refus</a>烧录进SD卡即可</p>
+<h1 id="yuan-cheng-guan-li-gong-ju">远程管理工具</h1>
+<p>可以在cmd或powershell里面输入命令来连接ssh<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh –p端口号 用户名@IP地址  #例如：ssh –p22 root@127.0.0.1</span><br></pre></td></tr></table></figure>
+<p>我使用了<a href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a>来连接ssh</p>
+<h1 id="mi-ma">密码</h1>
+<h3 id="mo-ren-zhang-hu-orangepi" id="默认账户：orangepi">默认账户：orangepi</h3>
+<h3 id="mo-ren-root-zhang-hu-root" id="默认root账户：root">默认root账户：root</h3>
+<h3 id="mo-ren-mi-ma-orangepi" id="默认密码：orangepi">默认密码：orangepi</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#修改密码</span><br><span class="line">sudo passwd orangepi #orangepi为要修改的用户的名字，按提示修改即可</span><br></pre></td></tr></table></figure>
+<h1 id="pei-zhi-wang-luo">配置网络</h1>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmtui #图形界面配置网络</span><br></pre></td></tr></table></figure>
+<p>其他网络信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ifconfig #查看ip信息</span><br><span class="line">route -n #查看网关信息</span><br></pre></td></tr></table></figure>
+<p>ip地址可能会跳动，ssh连接会不方便，要进入nmtui设置静态ip</p>
+<h1 id="ruan-jian-yuan">软件源</h1>
+<p>香橙派官方系统已经配置好国内源了，国产派大法好，一般不用改软件源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.save #备份好习惯</span><br><span class="line">sudo cp /etc/apt/sources.list.save /etc/apt/sources.list #搞炸了用这条命令恢复</span><br><span class="line">nano /etc/apt/sources.list #编辑源</span><br></pre></td></tr></table></figure>
+<h1 id="geng-xin-xi-tong">更新系统</h1>
+<p>不更新，后期装软件会有各种奇怪的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade -y</span><br></pre></td></tr></table></figure>
+<h1 id="shi-qu">时区</h1>
+<p>香橙派连软件源都想好了，居然没调好时区（悲）<br>
+时间错误会导致某些网站证书验证问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">date #查看当前时间</span><br><span class="line">sudo tzselect #调整时区，看着按就行</span><br></pre></td></tr></table></figure>
+<h1 id="can-kao-wen-xian">参考文献</h1>
+<p><a href="https://zhuanlan.zhihu.com/p/658960791">OrangePi ZERO 2 新手配置教程</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://blog.csdn.net/wm609972715/article/details/83759114">Windows 下 cmd 窗口使用 ssh 命令</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 ]]></content>
       <categories>
-        <category>杂谈</category>
+        <category>技术</category>
       </categories>
       <tags>
-        <tag>杂谈</tag>
-        <tag>技术</tag>
+        <tag>Linux</tag>
+        <tag>香橙派</tag>
+        <tag>单板机</tag>
       </tags>
   </entry>
   <entry>
@@ -301,6 +301,37 @@ GND——GND</p>
 <h1 id="can-kao-zi-liao">参考资料</h1>
 <p><a href="https://zhuanlan.zhihu.com/p/57668199">电影评分标准的简单设立</a></p>
 <p><a href="http://xindetihuiya.com/gaokao/news/1031909.html">高考语文作文评分标准及评分细则一览表</a></p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从《外剧》主题曲谈社会的变迁</title>
+    <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>作为一名标准的广东人，想必TA一定听过一段歌词：生仔未必就是福~~要娶媳妇要分屋~~</p>
+<p>这是中国内地集数最多的电视剧《外来媳妇本地郎》，自2000年11月开播，至今已有4000多集。由于其开播时间之长，集数之多，这部电视剧的主题曲响遍了整个广东地区，成为一代广东人的回忆。但就在几年前，这首自开播沿用的主题曲正式走入坟墓，因为《外来媳妇本地郎》采用了重制版主题曲。</p>
+<h1 id="shi-ting-huan-jie">试听环节</h1>
+<p>初版：</p>
+<audio controls height="100" width="100">
+  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/初版.mp3" type="audio/mpeg">
+</audio>
+<p>新版：</p>
+<audio controls height="100" width="100">
+  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/新版.mp3" type="audio/mpeg">
+</audio>
+<h1 id="yi-xie-xiang-fa">一些想法</h1>
+<p>初版主题曲使用镲、小提琴等乐器，体现了中西混合，开放包容的精神，与2000年代广东地区改革开放的精神相统一。对比与新版，初版的伴奏仅使用了简单的混音，乐器之间层次分明。镲的声音尖锐，体现了热烈、奔放的情感。小提琴的音调转折更少，听起来爽快、直率。我眼前仿佛展现了一幅画面：千禧年间，一个从乡里来的农村人，初搬入省城没多久，街道上来往的大众桑塔纳中混杂着三八大杠自行车，道路两旁西装革履的行人，大楼上印着XX日货的巨大广告牌，令他目不暇接。几年之后，他已经顺利地融入了城市里的生活。同城市人一样，他也西装白衬衫，脚踏着锃亮的皮鞋，自信从容、昂首挺胸地走在大街上。但是，城市几年间的生活并未洗脱他身上的乡土气息：身穿洋装，内心仍是那个宽厚大方、质朴、向他人毫无保留地展露内心想法的小伙，坚守着骆驼祥子般勤劳致富的淳朴乡土精神。</p>
+<p>从更大的角度来说，这也展现了当时改革开放不久，我国刚刚加入世界贸易的行列中的精神面貌。我们自信大方，内心又带有那个小伙的淳朴气息。</p>
+<p>新版的主题曲中，镲的部分被电子乐器取代，增加了鼓点，音调变得柔和。小提琴声音变得不那么突出，变得短促，同时增加了背景乐器，<s>整体听起来更像靡靡之音</s>。曾经的小伙已经完全失去了乡土气息，过上了灯红酒绿、纸醉金迷的小资生活（误）。新版的主题曲也展现了自信，不是那种初出茅庐，充满干劲的自信，而是功成名就之后的自信。</p>
+<h1 id="pian-tou-hua-mian">片头画面</h1>
+<p><img src="%E5%88%9D%E7%89%88.webp" alt="初版片头"></p>
+<p><img src="%E6%96%B0%E7%89%88.webp" alt="新版片头"></p>
+<p>在历代片头的变化中，我们得以窥见社会的变迁与发展。初版片头展现的是日出的广州城，紧接着是西关大院的古朴。新版片头则是广州夜晚的航拍画面。从片头的变化可见，城市发展得越来越好，但曾经那个烟火气息的西关大院已彻底从片头消失。我们是否可以从中感受到人文关怀的减少？</p>
 ]]></content>
       <categories>
         <category>杂谈</category>
@@ -407,37 +438,6 @@ GND——GND</p>
       </categories>
       <tags>
         <tag>游戏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从《外剧》主题曲谈社会的变迁</title>
-    <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>作为一名标准的广东人，想必TA一定听过一段歌词：生仔未必就是福~~要娶媳妇要分屋~~</p>
-<p>这是中国内地集数最多的电视剧《外来媳妇本地郎》，自2000年11月开播，至今已有4000多集。由于其开播时间之长，集数之多，这部电视剧的主题曲响遍了整个广东地区，成为一代广东人的回忆。但就在几年前，这首自开播沿用的主题曲正式走入坟墓，因为《外来媳妇本地郎》采用了重制版主题曲。</p>
-<h1 id="shi-ting-huan-jie">试听环节</h1>
-<p>初版：</p>
-<audio controls height="100" width="100">
-  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/初版.mp3" type="audio/mpeg">
-</audio>
-<p>新版：</p>
-<audio controls height="100" width="100">
-  <source src="/2025/04/12/从《外剧》主题曲谈社会的变迁/新版.mp3" type="audio/mpeg">
-</audio>
-<h1 id="yi-xie-xiang-fa">一些想法</h1>
-<p>初版主题曲使用镲、小提琴等乐器，体现了中西混合，开放包容的精神，与2000年代广东地区改革开放的精神相统一。对比与新版，初版的伴奏仅使用了简单的混音，乐器之间层次分明。镲的声音尖锐，体现了热烈、奔放的情感。小提琴的音调转折更少，听起来爽快、直率。我眼前仿佛展现了一幅画面：千禧年间，一个从乡里来的农村人，初搬入省城没多久，街道上来往的大众桑塔纳中混杂着三八大杠自行车，道路两旁西装革履的行人，大楼上印着XX日货的巨大广告牌，令他目不暇接。几年之后，他已经顺利地融入了城市里的生活。同城市人一样，他也西装白衬衫，脚踏着锃亮的皮鞋，自信从容、昂首挺胸地走在大街上。但是，城市几年间的生活并未洗脱他身上的乡土气息：身穿洋装，内心仍是那个宽厚大方、质朴、向他人毫无保留地展露内心想法的小伙，坚守着骆驼祥子般勤劳致富的淳朴乡土精神。</p>
-<p>从更大的角度来说，这也展现了当时改革开放不久，我国刚刚加入世界贸易的行列中的精神面貌。我们自信大方，内心又带有那个小伙的淳朴气息。</p>
-<p>新版的主题曲中，镲的部分被电子乐器取代，增加了鼓点，音调变得柔和。小提琴声音变得不那么突出，变得短促，同时增加了背景乐器，<s>整体听起来更像靡靡之音</s>。曾经的小伙已经完全失去了乡土气息，过上了灯红酒绿、纸醉金迷的小资生活（误）。新版的主题曲也展现了自信，不是那种初出茅庐，充满干劲的自信，而是功成名就之后的自信。</p>
-<h1 id="pian-tou-hua-mian">片头画面</h1>
-<p><img src="%E5%88%9D%E7%89%88.webp" alt="初版片头"></p>
-<p><img src="%E6%96%B0%E7%89%88.webp" alt="新版片头"></p>
-<p>在历代片头的变化中，我们得以窥见社会的变迁与发展。初版片头展现的是日出的广州城，紧接着是西关大院的古朴。新版片头则是广州夜晚的航拍画面。从片头的变化可见，城市发展得越来越好，但曾经那个烟火气息的西关大院已彻底从片头消失。我们是否可以从中感受到人文关怀的减少？</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
       </tags>
   </entry>
   <entry>
@@ -616,7 +616,7 @@ GND——GND</p>
     <url>/2024/06/26/%E5%90%AC%E6%AD%8C%E9%9A%BE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="ting-ge-nan-ti">听歌难题</h1>
 <p>什么样的音乐平台最好？有很多版权，简洁美观的UI，较低的会员费。在我体验了好几家平台后发现，想集三点于一身就是在做梦😅。</p>
-<p>目前已体验过QQ音乐，网易云音乐，Spotify，Apple Music。当前正在使用<s>Apple Music</s>网易云音乐。</p>
+<p>目前已体验过QQ音乐，网易云音乐，Spotify，Apple Music。当前正在使用<s>Apple Music</s> 网易云音乐。</p>
 <p>由于QQ音乐，酷狗音乐，酷我音乐版权共享，故下文以QQ音乐为代表，不再作区分。</p>
 <h1 id="ban-quan-dui-bi">版权对比</h1>
 <p>版权由多到少排序<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
@@ -633,13 +633,20 @@ GND——GND</p>
 <li>QQ音乐，网易云音乐</li>
 <li>Apple Music国区（大学生认证，闲鱼轻松拿下）</li>
 </ul>
-<p>PS：Apple Music家庭拼车会更加便宜，但是有卖家销号跑路的情况。目前我正在尝试拼车，希望不会遇到骗子🤨。</p>
+<p>PS：Apple Music家庭拼车会更加便宜，但是有卖家销号跑路的情况。</p>
+<h2 id="jie-mian-mei-guan" id="界面美观">界面美观</h2>
+<p>美观性比较主观，仅供参考。顺序排序</p>
+<ul>
+<li>Apple Music</li>
+<li>网易云，QQ音乐</li>
+<li>Spotify</li>
+</ul>
 <hr>
 <h1 id="yi-xia-shi-fa-lao-sao-shi-jian">以下是发牢骚时间</h1>
 <h2 id="q-yin-shi-dai" id="Q音时代">Q音时代</h2>
 <p>在我小学的时候，身边朋友在用QQ音乐（或许是因为能和腾讯系产品联动？），酷我音乐比较小众，而酷狗音乐经常在电脑上被“高速下崽器”下崽，不喜欢。在初中的时候，决定听歌。刚好我妈的手机上安装了QQ音乐，直接QQ登录，非常方便。</p>
 <p>后来，看一些游戏主播直播的时候，发现他们大多都用网易云。嗯，为什么都用网易云呢？莫非关键之处在于“云”字？想起一些视频平台，没版权的影视就给你一个外链，可以跳转看。难道网易云也可以实现类似操作，故称“网易云”？又或者网易云本身版权多，主播才用？</p>
-<p>后来发生了“五五断更节”事件，使我彻底下定决心，非必要不使用腾讯系产品，<s>万恶的资本家</s>。于是转移网易云。</p>
+<p>后来发生了“五五断更节”事件，使我彻底下定决心，非必要不使用腾讯系产品，<s>万恶的资本家。</s> 于是转移网易云。</p>
 <h2 id="wang-yi-yun-shi-dai" id="网易云时代">网易云时代</h2>
 <p>转到网易云后发现，它才是版权最少的😅。经常出现之前点收藏的歌曲突然没版权，或者变成VIP专享。QQ音乐也会出现，但是网易云频率更高。当然，网易云也是有好处的，小的音乐人比较多，一些小众音乐是在网易云独占的。</p>
 <h2 id="spotify-shi-dai" id="Spotify时代">Spotify时代</h2>
@@ -650,7 +657,7 @@ GND——GND</p>
 <p>既然可以一直1元购，那为何不转Apple Music呢？于是，它成了我的主力软件，背叛了Spotify😜。</p>
 <p>后来，在闲鱼看到有些卖家描述：“账号已达试用上限的勿拍”，貌似不能一直一元购下去？于是选择家庭拼车，一个月也就3块多（如果不被骗的话）</p>
 <h2 id="wang-yi-yun-wo-cuo-liao" id="网易云，我错了😭">网易云，我错了😭</h2>
-<p>使用了近半年的Apple Music，发现它的推歌真是依托答辩，个人定制化歌单少，还不允许用户上传歌单，~~别给我整天推黑鬼说唱了😡。~~此外，外语歌曲没翻译也是一大痛点。当然，最重要的是价格问题。某鱼的网易云一年VIP仅需40多，Apple Music家庭拼车也能被一些贩子卖到40多，那为什么不选择网易云呢？还不用承担中途被踢下车的风险。</p>
+<p>使用了近半年的Apple Music，发现推歌真是依托答辩，个人定制化歌单少，还不允许用户上传歌单，<s>别给我整天推黑鬼说唱了😡。</s> 当然，最重要的是价格问题。某鱼的网易云一年VIP仅需40多，Apple Music家庭拼车也能被一些贩子卖到40多，那为什么不选择网易云呢？还不用承担中途被踢下车的风险。</p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
