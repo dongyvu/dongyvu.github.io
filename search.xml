@@ -1,6 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>N1盒子折腾小记</title>
+    <url>/2025/02/09/N1%E7%9B%92%E5%AD%90%E6%8A%98%E8%85%BE%E5%B0%8F%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>想着用香橙派当个软路由，可总是动不动就宕机，一怒之下购入斐讯N1盒子，-100￥。我特意挑选了刷好iStoreOS的机子，免去刷机烦恼。</p>
+<p>本教程同样适用于OpenWrt衍生系统。</p>
+<h1 id="kai-ji">开机</h1>
+<p>插上网线（一端插N1，一端插路由器LAN口）和电源，浏览器输入神秘IP，进入路由器后台管理界面。</p>
+<p><img src="%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86.webp" alt=""></p>
+<p>找到N1盒子的IP，访问。默认用户名为：<code>root</code>。默认密码为：<code>password</code>。</p>
+<h1 id="pei-zhi-guo-nei-ruan-jian-yuan">配置国内软件源</h1>
+<p>iStoreOS默认配置好了国内软件源，这一段只针对原生OpenWrt用户。</p>
+<p>找到<code>系统</code>——<code>软件包</code>——<code>opkg配置</code></p>
+<p><img src="%E9%85%8D%E7%BD%AEopkg.webp" alt=""></p>
+<p>修改distfreeds.conf这项</p>
+<p><img src="%E8%BD%AF%E4%BB%B6%E6%BA%90.webp" alt=""></p>
+<p>编辑软件源前请确定处理器架构</p>
+<p>uname -m</p>
+<p>例如N1盒子输出aarch64，则应搜索<code>openwrt aarch64软件源</code></p>
+<h1 id="gao-dian-ke-xue-de-dong-xi">搞点科学的东西</h1>
+<p>如果在以下的安装过程中出现无法下载的问题，首先考虑遭遇墙，其次考虑移动墙中墙，更换网络环境试试。</p>
+<h2 id="an-zhuang-yi-lai" id="安装依赖">安装依赖</h2>
+<p>进入终端，输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">opkg update #升级软件包</span><br><span class="line"></span><br><span class="line">opkg install coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base	#安装依赖</span><br></pre></td></tr></table></figure>
+<h2 id="an-zhuang-open-clash" id="安装OpenClash">安装OpenClash</h2>
+<p>进入<a href="https://github.com/vernesong/OpenClash/releases">官方下载</a>，下载ipk包</p>
+<p><img src="%E4%B8%8B%E8%BD%BD.webp" alt=""></p>
+<p><code>iStore</code>——<code>手动安装</code>——<code>选择文件</code>，手动安装ipk包</p>
+<p><img src="%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85.webp" alt=""></p>
+<p>安装完成后刷新网页，找到<code>服务</code>——<code>OpenClash</code></p>
+<p><img src="openclash.webp" alt=""></p>
+<p>首次进入会要求下载内核，选择延迟最低的CDN下载即可。</p>
+<h2 id="pei-zhi-open-clash" id="配置OpenClash">配置OpenClash</h2>
+<p>这一步网上众说纷纭，在我多次尝试后终于找到可行方案。</p>
+<p>首先，导入订阅。</p>
+<p><img src="%E9%85%8D%E7%BD%AE%E8%AE%A2%E9%98%85.webp" alt=""></p>
+<p>一般机场都会兼容OpenClash的协议，无需转换订阅。</p>
+<p><img src="%E9%85%8D%E7%BD%AE2.webp" alt=""></p>
+<p>保存，更新。</p>
+<p><img src="%E9%85%8D%E7%BD%AE3.webp" alt=""></p>
+<p>返回主页，会看到配置已经导入。经过我的测试，我的N1盒子仅在TUN模式时本机可用（终端ping google不会超时）。</p>
+<p><img src="%E9%85%8D%E7%BD%AE4.webp" alt=""></p>
+<p>以下三个任选其一进入管理面板，选择节点，即可使用。</p>
+<p><img src="%E9%85%8D%E7%BD%AE5.webp" alt=""></p>
+<h2 id="shi-yong-open-clash" id="使用OpenClash">使用OpenClash</h2>
+<p>有三种方案，任选一种即可。</p>
+<h3 id="n-1-zuo-wei-zhu-lu-you" id="N1作为主路由">N1作为主路由</h3>
+<p>主路由需要拥有WAN口和LAN口，实际上，N1只有一个LAN口，所以N1是不能作为主路由的。为了给其他设备的用户参考，这里假设平行世界的N1有WAN口和LAN口。</p>
+<ul>
+<li>先将N1的WAN口和光猫LAN口相连</li>
+<li>再将N1的LAN口和路由器的WAN口相连</li>
+</ul>
+<p>光猫 (LAN口)<br>
+|<br>
+|<br>
+N1盒子(WAN口)——————N1盒子(LAN口)<br>
+|<br>
+|<br>
+路由器(WAN口)</p>
+<p>连接好后，启用OpenClash，连上路由器wifi，即可使用。</p>
+<p>这个方法里，N1大概率是要放在家里的弱电箱里面，供电和散热问题先不说，弱电箱得塞得下N1才行。所以我并不推荐这个方法。</p>
+<h3 id="n-1-zuo-wei-pang-lu-you" id="N1作为旁路由">N1作为旁路由</h3>
+<p>方案一：</p>
+<p>此方案不要求你家有路由器。新房子一般会在每个房间预留一个网口面板，连接上光猫的LAN口，如果不通网自己去弱电箱接一下线就行。此时，N1放房间里。</p>
+<p>光猫 (LAN口)<br>
+|<br>
+|<br>
+|<br>
+N1盒子(LAN口)</p>
+<p>如果房子较老，没有预留网口，那么一般也不会有弱电箱，N1直接放在光猫旁边就行。</p>
+<p>连接上N1盒子或光猫的WiFi，设备手动指定路由器（有些设备称为“网关”），如下图配置。</p>
+<p><img src="%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE.webp" alt=""></p>
+<p>方案二：</p>
+<p>光猫 (LAN口) —<br>
+|<br>
+|— 网线 —&gt; N1盒子 (LAN口)<br>
+|<br>
+|— 网线 —&gt; 路由器 (WAN口)</p>
+<p>网线的一端插N1，一端插光猫LAN口。</p>
+<p>进入路由器管理面板，配置DHCP选项，把“网关”这一项设为N1盒子的IP，并且把N1盒子获取IP的方式设置为静态（下文讲解）。</p>
+<p><img src="%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE.webp" alt=""></p>
+<p>至此，我们的软路由就有了第一项功能啦🥰。</p>
+<h2 id="can-kao-zi-liao" id="参考资料">参考资料</h2>
+<p><a href="https://blog.luhua.site/archives/1733040357648">软路由系统iStoreOS安装OpenClash</a><br>
+<a href="https://www.bilibili.com/video/BV1pY411N7fX">Merlin AIMesh 组网 + iStoreOS 旁路由（推荐观看这个视频教程）</a></p>
+<h1 id="pei-zhi-jing-tai-ip">配置静态IP</h1>
+<p>完成上述配置后，N1盒子的IP地址是由路由器或光猫随机分配的，而且可能会随时间变动。为了方便后续搭建其他服务，给N1盒子一个固定的IP很重要。（当然，不固定IP也是可以用哒）</p>
+<p>先在N1上执行命令<code>ifconfig</code>查看网络信息，注意以下信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">br-lan	# 或许你的设备不叫br-lan？</span><br><span class="line">		inet addr:192.168.0.108  Bcast:192.168.0.255  Mask:255.255.255.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>由于子网掩码是255.255.255.0，所以我们只能修改“192.168.0.108”中的“108”这一数值，它可在1~254之间取值。</p>
+<p>接下来设置静态IP</p>
+<p><img src="%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE1.webp" alt=""><br>
+<img src="%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE2.webp" alt=""><br>
+<img src="%E9%9D%99%E6%80%81%E9%85%8D%E7%BD%AE3.webp" alt=""></p>
+<p>本机IP：192.168.0.2（设置一个好记的值，注意不要和其他设备IP相同）<br>
+子网掩码：255.255.255.0（与上面一致）<br>
+网关：192.168.1.1（一般光猫的IP都是这个，如不确定可以在终端执行<code>route -n</code>查看）<br>
+DNS地址：192.168.1.1或8.8.8.8</p>
+<p>点击“保存”，等待生效。iStoreOS有自动恢复功能，修改网络设置后60s内不登录系统会恢复之前的网络配置，所以不用担心。</p>
+<h1 id="pei-zhi-emby-mei-ti-ku">配置Emby媒体库</h1>
+<p>懒惰，不想写了，参考别人教程就好。</p>
+<p>Emby客户端推荐：</p>
+<p><a href="https://t.me/yamby_release">Yamby</a>：一个第三方emby客户端，界面美观，免费使用，已接入弹弹play的API，可以看弹幕。作者目前只在电报群发布软件。</p>
+<p><a href="https://bmh.163.com/">网易爆米花</a>：网易出品，暂时免费，可登录账号实现多端同步，不仅支持emby，还支持百度网盘，阿里云盘，三大运营商网盘的直连访问。</p>
+<h2 id="can-kao-zi-liao-1" id="参考资料-2">参考资料</h2>
+<p><a href="https://www.imtrq.com/archives/3754">在N1盒子上用docker安装Emby，配合fileball开启弹幕追番</a><br>
+<a href="https://www.github-zh.com/projects/352626198-emby.plugins.douban">Emby的豆瓣削刮器</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>NAS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你好，世界！</title>
+    <url>/2024/05/20/hello_world/</url>
+    <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
+<hr>
+<p>感谢友人<a href="https://yuuu.org/">竹月</a>，他在我建站时不费余力地解答我的疑惑。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git连接GitHub-ssh异常</title>
+    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
+<p><img src="1.webp" alt=""><br>
+<img src="2.webp" alt=""></p>
+<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
+<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
+<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
+<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
+<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
+<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Root备忘录</title>
     <url>/2024/11/08/Root%E5%A4%87%E5%BF%98%E5%BD%95/</url>
     <content><![CDATA[<h1 id="root-bei-wang-lu">root备忘录</h1>
@@ -79,100 +232,6 @@
       </tags>
   </entry>
   <entry>
-    <title>N1盒子折腾小记</title>
-    <url>/2025/02/09/N1%E7%9B%92%E5%AD%90%E6%8A%98%E8%85%BE%E5%B0%8F%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>想着用香橙派当个软路由，可总是动不动就宕机，一怒之下购入斐讯N1盒子，-100￥。我特意挑选了刷好iStoreOS的机子，免去刷机烦恼。</p>
-<p>本教程同样适用于OpenWrt衍生系统。</p>
-<h1 id="kai-ji">开机</h1>
-<p>插上网线（一端插N1，一端插路由器LAN口）和电源，浏览器输入神秘IP，进入路由器后台管理界面。</p>
-<p><img src="%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86.webp" alt=""></p>
-<p>找到N1盒子的IP，访问。默认用户名为：<code>root</code>。默认密码为：<code>password</code>。</p>
-<h1 id="pei-zhi-guo-nei-ruan-jian-yuan">配置国内软件源</h1>
-<p>iStoreOS默认配置好了国内软件源，这一段只针对原生OpenWrt用户。</p>
-<p>找到<code>系统</code>——<code>软件包</code>——<code>opkg配置</code></p>
-<p><img src="%E9%85%8D%E7%BD%AEopkg.webp" alt=""></p>
-<p>修改distfreeds.conf这项</p>
-<p><img src="%E8%BD%AF%E4%BB%B6%E6%BA%90.webp" alt=""></p>
-<p>编辑软件源前请确定处理器架构</p>
-<p>uname -m</p>
-<p>例如N1盒子输出aarch64，则应搜索<code>openwrt aarch64软件源</code></p>
-<h1 id="gao-dian-ke-xue-de-dong-xi">搞点科学的东西</h1>
-<p>如果在以下的安装过程中出现无法下载的问题，首先考虑遭遇墙，其次考虑墙中墙，更换网络环境试试。</p>
-<h2 id="an-zhuang-yi-lai" id="安装依赖">安装依赖</h2>
-<p>进入终端，输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">opkg update #升级软件包</span><br><span class="line"></span><br><span class="line">opkg install coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base	#安装依赖</span><br></pre></td></tr></table></figure>
-<h2 id="an-zhuang-open-clash" id="安装OpenClash">安装OpenClash</h2>
-<p>进入<a href="https://github.com/vernesong/OpenClash/releases">官方下载</a>，下载ipk包</p>
-<p><img src="%E4%B8%8B%E8%BD%BD.webp" alt=""></p>
-<p><code>iStore</code>——<code>手动安装</code>——<code>选择文件</code>，手动安装ipk包</p>
-<p><img src="%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85.webp" alt=""></p>
-<p>安装完成后刷新网页，找到<code>服务</code>——<code>OpenClash</code></p>
-<p><img src="openclash.webp" alt=""></p>
-<p>首次进入会要求下载内核，选择延迟最低的CDN下载即可。</p>
-<h2 id="pei-zhi-open-clash" id="配置OpenClash">配置OpenClash</h2>
-<p>这一步网上众说纷纭，在我多次尝试后终于找到可行方案。</p>
-<p>首先，导入订阅。</p>
-<p><img src="%E9%85%8D%E7%BD%AE%E8%AE%A2%E9%98%85.webp" alt=""></p>
-<p>一般机场都会兼容OpenClash的协议，无需转换订阅。</p>
-<p><img src="%E9%85%8D%E7%BD%AE2.webp" alt=""></p>
-<p>保存，更新。</p>
-<p><img src="%E9%85%8D%E7%BD%AE3.webp" alt=""></p>
-<p>返回主页，会看到配置已经导入。经过我的测试，我的N1盒子仅在TUN模式时本机可用（终端ping google不会超时）。</p>
-<p><img src="%E9%85%8D%E7%BD%AE4.webp" alt=""></p>
-<p>以下三个任选其一进入管理面板，选择节点，即可使用。</p>
-<p><img src="%E9%85%8D%E7%BD%AE5.webp" alt=""></p>
-<h2 id="shi-yong-open-clash" id="使用OpenClash">使用OpenClash</h2>
-<p>有三种方案，任选一种即可。</p>
-<h3 id="n-1-zuo-wei-zhu-lu-you" id="N1作为主路由">N1作为主路由</h3>
-<p>N1盒子的网线直接插在光猫上。这时候什么都不用配置，连上N1的无线热点就能用。但许多家庭的光猫接口都不会留有空余，有条件的可以这样用。</p>
-<h3 id="n-1-zuo-wei-pang-lu-you" id="N1作为旁路由">N1作为旁路由</h3>
-<p>网线一端插N1，一端插路由器LAN口，这也是我使用的接线方法。这时候有两种方案。</p>
-<p>方案一：连接上N1盒子或路由器的WiFi，设备手动指定路由器（有些设备称为“网关”），如下图配置。</p>
-<p><img src="%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE.webp" alt=""></p>
-<p>方案二（这个方案未经本人实践！）：在路由器管理面板设置DHCP的网关为N1盒子的IP，并且把N1盒子获取IP的方式设置为静态。其实网上许多教程会让我一开始就设定静态IP，可一旦配置错误，N1的管理面板就无法访问，等同于变砖，我没敢乱尝试😅。</p>
-<p><img src="%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE.webp" alt=""></p>
-<p>至此，我们的软路由就有了第一项功能啦🥰。</p>
-<h2 id="can-kao-zi-liao" id="参考资料">参考资料</h2>
-<p><a href="https://blog.luhua.site/archives/1733040357648">软路由系统iStoreOS安装OpenClash</a><br>
-<a href="https://www.bilibili.com/video/BV1pY411N7fX">Merlin AIMesh 组网 + iStoreOS 旁路由（推荐观看这个视频教程）</a></p>
-<h1 id="pei-zhi-emby-mei-ti-ku">配置Emby媒体库</h1>
-<p>懒惰，不想写了，参考别人教程就好。</p>
-<h2 id="can-kao-zi-liao-1" id="参考资料-2">参考资料</h2>
-<p><a href="https://www.imtrq.com/archives/3754">在N1盒子上用docker安装Emby，配合fileball开启弹幕追番</a><br>
-<a href="https://www.github-zh.com/projects/352626198-emby.plugins.douban">Emby的豆瓣削刮器</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>NAS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git连接GitHub-ssh异常</title>
-    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
-<p><img src="1.webp" alt=""><br>
-<img src="2.webp" alt=""></p>
-<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
-<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
-<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
-<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
-<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
-<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>香橙派的使用配置</title>
     <url>/2024/05/22/orangepi-config/</url>
     <content><![CDATA[<p>前些天购入了一个香橙派Zero3，但是时不时系统崩坏，（或许是sd卡不是香橙派官方店铺买的？）现在来捋一遍安装过程以便日后崩坏时重装系统。</p>
@@ -229,21 +288,6 @@ GND——GND</p>
         <tag>Linux</tag>
         <tag>香橙派</tag>
         <tag>单板机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>你好，世界！</title>
-    <url>/2024/05/20/hello_world/</url>
-    <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
-<hr>
-<p>感谢友人<a href="https://yuuu.org/">竹月</a>，他在我建站时不费余力地解答我的疑惑。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>技术</tag>
       </tags>
   </entry>
   <entry>
@@ -441,6 +485,69 @@ GND——GND</p>
       </tags>
   </entry>
   <entry>
+    <title>听歌难题</title>
+    <url>/2024/06/26/%E5%90%AC%E6%AD%8C%E9%9A%BE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="ting-ge-nan-ti">听歌难题</h1>
+<p>什么样的音乐平台最好？有很多版权，简洁美观的UI，较低的会员费。在我体验了好几家平台后发现，想集三点于一身就是在做梦😅。</p>
+<p>目前已体验过QQ音乐，网易云音乐，Spotify，Apple Music。当前正在使用<s>Apple Music</s> 网易云音乐。</p>
+<p>由于QQ音乐，酷狗音乐，酷我音乐版权共享，故下文以QQ音乐为代表，不再作区分。</p>
+<h1 id="ban-quan-dui-bi">版权对比</h1>
+<p>版权由多到少排序<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<ul>
+<li>Spotify</li>
+<li>Apple Music外区，QQ音乐</li>
+<li>Apple Music国区</li>
+<li>网易云音乐</li>
+</ul>
+<h1 id="hui-yuan-fei">会员费</h1>
+<p>费用由多到少排序</p>
+<ul>
+<li>Spotify，Apple Music外区</li>
+<li>QQ音乐，网易云音乐</li>
+<li>Apple Music国区（大学生认证，闲鱼轻松拿下）</li>
+</ul>
+<p>PS：Apple Music家庭拼车会更加便宜，但是有卖家销号跑路的情况。</p>
+<h2 id="jie-mian-mei-guan" id="界面美观">界面美观</h2>
+<p>美观性比较主观，仅供参考。顺序排序</p>
+<ul>
+<li>Apple Music</li>
+<li>网易云，QQ音乐</li>
+<li>Spotify</li>
+</ul>
+<hr>
+<h1 id="yi-xia-shi-fa-lao-sao-shi-jian">以下是发牢骚时间</h1>
+<h2 id="q-yin-shi-dai" id="Q音时代">Q音时代</h2>
+<p>在我小学的时候，身边朋友在用QQ音乐（或许是因为能和腾讯系产品联动？），酷我音乐比较小众，而酷狗音乐经常在电脑上被“高速下崽器”下崽，不喜欢。在初中的时候，决定听歌。刚好我妈的手机上安装了QQ音乐，直接QQ登录，非常方便。</p>
+<p>后来，看一些游戏主播直播的时候，发现他们大多都用网易云。嗯，为什么都用网易云呢？莫非关键之处在于“云”字？想起一些视频平台，没版权的影视就给你一个外链，可以跳转看。难道网易云也可以实现类似操作，故称“网易云”？又或者网易云本身版权多，主播才用？</p>
+<p>后来发生了“五五断更节”事件，使我彻底下定决心，非必要不使用腾讯系产品，<s>万恶的资本家。</s> 于是转移网易云。</p>
+<h2 id="wang-yi-yun-shi-dai" id="网易云时代">网易云时代</h2>
+<p>转到网易云后发现，它才是版权最少的😅。经常出现之前点收藏的歌曲突然没版权，或者变成VIP专享。QQ音乐也会出现，但是网易云频率更高。当然，网易云也是有好处的，小的音乐人比较多，一些小众音乐是在网易云独占的。</p>
+<h2 id="spotify-shi-dai" id="Spotify时代">Spotify时代</h2>
+<p>刚知道这个平台的时候就下载来体验了一下，发现不开会员不能自己点歌！搜索一首想听的歌，只能播放歌曲所在的专辑，而且顺序随机。有些歌的歌词还加载不出来。垃圾软件！！！</p>
+<p>后来，发现吾爱大神的破解版，解除了点歌限制，再加上可以裸连，歌词什么的可以容忍。重要的是没有单曲购买这种东西，什么歌都可以播。于是背叛网易云，润到Spotify了。</p>
+<h2 id="apple-music" id="Apple-Music">Apple Music</h2>
+<p>听同学说Apple Music不错，刚好又在闲鱼上看到1元的Apple Music会员，号称到期了可以重复拍。好奇试了试，反正被骗了也才一块钱。听第一耳时，居然顿感音质比Spotify好。 <s>我可是木耳。</s> Apple Music的歌词动画应该是全网最好的了，非常的好看。而且绝大多数歌都有歌词，不像Spotify的垃圾歌词支持。国区的版权并没有很少，至少我听的歌都有版权。Apple Music一直被人诟病的一点是日语歌曲名字混乱，罗马音、英文、假名都有。</p>
+<p>既然可以一直1元购，那为何不转Apple Music呢？于是，它成了我的主力软件，背叛了Spotify😜。</p>
+<p>后来，在闲鱼看到有些卖家描述：“账号已达试用上限的勿拍”，貌似不能一直一元购下去？于是选择家庭拼车，一个月也就3块多（如果不被骗的话）</p>
+<h2 id="wang-yi-yun-wo-cuo-liao" id="网易云，我错了😭">网易云，我错了😭</h2>
+<p>使用了近半年的Apple Music，发现推歌真是依托答辩，个人定制化歌单少，还不允许用户上传歌单，<s>别给我整天推黑鬼说唱了😡。</s> 当然，最重要的是价格问题。某鱼的网易云一年VIP仅需40多，Apple Music家庭拼车也能被一些贩子卖到40多，那为什么不选择网易云呢？还不用承担中途被踢下车的风险。</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://sspai.com/post/64477#">https://sspai.com/post/64477#</a>! <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>音乐</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>体验包皮环切术</title>
     <url>/2025/01/10/%E4%BD%93%E9%AA%8C%E5%8C%85%E7%9A%AE%E7%8E%AF%E5%88%87%E6%9C%AF/</url>
     <content><![CDATA[<p>割包皮去了＞︿＜</p>
@@ -609,69 +716,6 @@ GND——GND</p>
       </categories>
       <tags>
         <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>听歌难题</title>
-    <url>/2024/06/26/%E5%90%AC%E6%AD%8C%E9%9A%BE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="ting-ge-nan-ti">听歌难题</h1>
-<p>什么样的音乐平台最好？有很多版权，简洁美观的UI，较低的会员费。在我体验了好几家平台后发现，想集三点于一身就是在做梦😅。</p>
-<p>目前已体验过QQ音乐，网易云音乐，Spotify，Apple Music。当前正在使用<s>Apple Music</s> 网易云音乐。</p>
-<p>由于QQ音乐，酷狗音乐，酷我音乐版权共享，故下文以QQ音乐为代表，不再作区分。</p>
-<h1 id="ban-quan-dui-bi">版权对比</h1>
-<p>版权由多到少排序<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
-<ul>
-<li>Spotify</li>
-<li>Apple Music外区，QQ音乐</li>
-<li>Apple Music国区</li>
-<li>网易云音乐</li>
-</ul>
-<h1 id="hui-yuan-fei">会员费</h1>
-<p>费用由多到少排序</p>
-<ul>
-<li>Spotify，Apple Music外区</li>
-<li>QQ音乐，网易云音乐</li>
-<li>Apple Music国区（大学生认证，闲鱼轻松拿下）</li>
-</ul>
-<p>PS：Apple Music家庭拼车会更加便宜，但是有卖家销号跑路的情况。</p>
-<h2 id="jie-mian-mei-guan" id="界面美观">界面美观</h2>
-<p>美观性比较主观，仅供参考。顺序排序</p>
-<ul>
-<li>Apple Music</li>
-<li>网易云，QQ音乐</li>
-<li>Spotify</li>
-</ul>
-<hr>
-<h1 id="yi-xia-shi-fa-lao-sao-shi-jian">以下是发牢骚时间</h1>
-<h2 id="q-yin-shi-dai" id="Q音时代">Q音时代</h2>
-<p>在我小学的时候，身边朋友在用QQ音乐（或许是因为能和腾讯系产品联动？），酷我音乐比较小众，而酷狗音乐经常在电脑上被“高速下崽器”下崽，不喜欢。在初中的时候，决定听歌。刚好我妈的手机上安装了QQ音乐，直接QQ登录，非常方便。</p>
-<p>后来，看一些游戏主播直播的时候，发现他们大多都用网易云。嗯，为什么都用网易云呢？莫非关键之处在于“云”字？想起一些视频平台，没版权的影视就给你一个外链，可以跳转看。难道网易云也可以实现类似操作，故称“网易云”？又或者网易云本身版权多，主播才用？</p>
-<p>后来发生了“五五断更节”事件，使我彻底下定决心，非必要不使用腾讯系产品，<s>万恶的资本家。</s> 于是转移网易云。</p>
-<h2 id="wang-yi-yun-shi-dai" id="网易云时代">网易云时代</h2>
-<p>转到网易云后发现，它才是版权最少的😅。经常出现之前点收藏的歌曲突然没版权，或者变成VIP专享。QQ音乐也会出现，但是网易云频率更高。当然，网易云也是有好处的，小的音乐人比较多，一些小众音乐是在网易云独占的。</p>
-<h2 id="spotify-shi-dai" id="Spotify时代">Spotify时代</h2>
-<p>刚知道这个平台的时候就下载来体验了一下，发现不开会员不能自己点歌！搜索一首想听的歌，只能播放歌曲所在的专辑，而且顺序随机。有些歌的歌词还加载不出来。垃圾软件！！！</p>
-<p>后来，发现吾爱大神的破解版，解除了点歌限制，再加上可以裸连，歌词什么的可以容忍。重要的是没有单曲购买这种东西，什么歌都可以播。于是背叛网易云，润到Spotify了。</p>
-<h2 id="apple-music" id="Apple-Music">Apple Music</h2>
-<p>听同学说Apple Music不错，刚好又在闲鱼上看到1元的Apple Music会员，号称到期了可以重复拍。好奇试了试，反正被骗了也才一块钱。听第一耳时，居然顿感音质比Spotify好。 <s>我可是木耳。</s> Apple Music的歌词动画应该是全网最好的了，非常的好看。而且绝大多数歌都有歌词，不像Spotify的垃圾歌词支持。国区的版权并没有很少，至少我听的歌都有版权。Apple Music一直被人诟病的一点是日语歌曲名字混乱，罗马音、英文、假名都有。</p>
-<p>既然可以一直1元购，那为何不转Apple Music呢？于是，它成了我的主力软件，背叛了Spotify😜。</p>
-<p>后来，在闲鱼看到有些卖家描述：“账号已达试用上限的勿拍”，貌似不能一直一元购下去？于是选择家庭拼车，一个月也就3块多（如果不被骗的话）</p>
-<h2 id="wang-yi-yun-wo-cuo-liao" id="网易云，我错了😭">网易云，我错了😭</h2>
-<p>使用了近半年的Apple Music，发现推歌真是依托答辩，个人定制化歌单少，还不允许用户上传歌单，<s>别给我整天推黑鬼说唱了😡。</s> 当然，最重要的是价格问题。某鱼的网易云一年VIP仅需40多，Apple Music家庭拼车也能被一些贩子卖到40多，那为什么不选择网易云呢？还不用承担中途被踢下车的风险。</p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><a href="https://sspai.com/post/64477#">https://sspai.com/post/64477#</a>! <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>音乐</tag>
       </tags>
   </entry>
   <entry>
