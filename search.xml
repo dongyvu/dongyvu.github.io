@@ -1,99 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>你好，世界！</title>
-    <url>/2024/05/20/hello_world/</url>
-    <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
-<hr>
-<p>感谢友人<a href="https://yuuu.org/">竹月</a>，他在我建站时不费余力地解答我的疑惑。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Root备忘录</title>
-    <url>/2024/11/08/Root%E5%A4%87%E5%BF%98%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="root-bei-wang-lu">root备忘录</h1>
-<h2 id="qian-yan" id="前言">前言</h2>
-<p>本人的手机于2022年2月7日购入，如今它的电池已经不耐操了，一天要两充到三充。可是它运行流畅（指流畅运行巨信），现在换机显得浪费我这个芯片了。那么，改一下系统调度会不会好一些呢🤔。好，来刷个机吧。</p>
-<p>以下记录了遇到的问题以备日后不时之需。</p>
-<h2 id="she-bei" id="设备">设备</h2>
-<ul>
-<li>Redmi Note 10 Pro<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
-</ul>
-<h2 id="root" id="root">root</h2>
-<p>用小米解锁工具解锁之后，第一次重启卡在了MIUI界面，想起来解锁前忘记打开“OEM解锁”了，吓得我一身冷汗😰。好在第二次重启成功了，没有变砖🥰。</p>
-<h2 id="guo-momo-jian-ce" id="过momo检测">过momo检测</h2>
-<p>我使用了kitsune mask作为root管理器，它本身提供了较强大的隐藏root的功能。隐藏root有白名单和黑名单两种模式。一般使用黑名单模式即可，不过勾选进黑名单的应用貌似无法启动，会卡白屏（测试了微信和momo两个应用），大概是我手机的玄学问题吧。白名单模式就没事了。</p>
-<p>开启隐藏前：<br>
-<img src="qian.webp" alt=""><br>
-开启隐藏后：<br>
-<img src="hou.webp" alt=""></p>
-<p>至于bootloader未锁定，可以通过刷safetynet fix模块来骗过momo，但不知道能不能骗过其他程序。</p>
-<h2 id="wei-xin-xiao-cheng-xu-wu-fa-da-kai" id="微信小程序无法打开">微信小程序无法打开</h2>
-<p>下载了Google play版微信，但发现小程序打不开😱，点小程序就卡在“正在加载”，难道是root的问题？瞎调一番后，偶然打开Google play，提示正在更新微信，更新完就能开小程序了😅。</p>
-<h2 id="wu-fa-lian-jie-wi-fi" id="无法连接WiFi">无法连接WiFi</h2>
-<p>打算连接舍友的手机热点，发现连不上，怎么点都显示“已保存”。几番调试，发现是无法连接WPA3-Personal加密的WiFi，其他加密方式可以连。但是之前我倒是可以连舍友WiFi。目前暂未找到解决方案。</p>
-<p><img src="wifi.webp" alt=""></p>
-<hr>
-<h1 id="lei-yuan-sheng-zhi-lu">类原生之旅</h1>
-<p>网上看到DSU Sideload这个软件.它利用了安卓自带的动态系统更新功能，但是可以自己分配动态系统的用户数据空间。也就是说，可以讲这个动态系统作为主力系统使用🤪。于是尝试了刷入CrDroid的GSI(通用系统镜像)。这可是人生中第一次用类原生当主力机器🥰。但是毕竟没经过适配，所以系统有Bug。</p>
-<p>CrDroid 9.X（安卓13） 版本下的bug：</p>
-<ul>
-<li>蓝牙断连</li>
-<li>5G环境下无法通话和收发短信</li>
-<li>无法使用杜比全景声</li>
-</ul>
-<p>CrDroid 10.X（安卓14） 版本下的bug：</p>
-<ul>
-<li>无法使用人脸识别</li>
-<li>仅使用了几天，测试不全</li>
-</ul>
-<p>刷上去之后，本以为可以回到一天一充的时代，但是貌似是我高估了类原生了。一天两充还是最低标准😥。看来就是硬件损耗了。</p>
-<p>用了一段时间，还是不能自适应这些bug，而且续航并没有提升。还是回去MIUI吧😅。</p>
-<p><s>为什么这一段没图呢？因为手机现在已经变砖了</s></p>
-<h1 id="yuan-ni-shua-ji-ban-sheng-gui-lai-gui-bu-lai-liao-a-a-a">愿你刷机半生，归来…归不来了啊啊啊</h1>
-<p>前文提到我使用的是动态系统。回去之前的MIUI14还是很顺利的。但是有一个说法：出厂系统就是最好的系统。于是决定刷回出厂的MIUI12.5.</p>
-<p>当然是选择最安全的Fastboot + miflash刷机大法。但在此之前，我萌生了个想法：何不把boot.img文件用magisk修补之后放回刷机包呢，这样就不用再次进Fastboot来root了🤪。</p>
-<p>经过漫长的等待，得到的是进度条的标红＞﹏＜，提示check boot_ab failed。看起来我偷梁换柱的计划露出鸡脚了。但是它还停留在Fastboot界面。</p>
-<p>好吧，已老实。刷原系统吧。这下总不会有问题吧，于是我安心地去刷牙了（此时是22：40）。</p>
-<p>事实证明，不要晚上刷机。刷完牙回来，天都塌了</p>
-<p>屏幕上鲜艳的红条直接让我心肺骤停（也是提示check xxx failed）。？？？，这还能报错？屏幕还黑了？尝试重新进入Fastboot…</p>
-<p>它没反应！！！而且电脑还一直有插入、拔出设备的提示音！看着计算机设备上的MediaTek device陷入了沉思，这是给我干进深度刷机里了？</p>
-<p>按照网上方法，使用SP Flash救砖。但是多次尝试，换了两个刷机包，仍然报错</p>
-<p><img src="dead.webp" alt=""></p>
-<p>已经23：45了，明天还要上课＞︿＜。当机立断，下单Redmi K80，以后再也不乱搞主力机了😭。<s>想不到我也有冲首发的一天</s></p>
-<hr>
-<p><s>我敬爱的Redmi Note 10 Pro同志Fastboot刷机失败，深度刷机抢救无效，于2024年11月28日逝世，享年2.8岁</s></p>
-<p>还是选择了闲鱼花30￥让手机起死回生，现在它又活了*^____^*。<br>
-为什么之前刷不进去呢？据闲鱼卖家说，刷入官方包的DA.bin文件需要验证，所以会卡红条。</p>
-<h1 id="can-kao-wen-xian">参考文献</h1>
-<p><a href="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-%28GSI%29-list">部分类原生GSI</a></p>
-<p><a href="https://www.bilibili.com/opus/990431050619420673">红米 note 10 pro 刷入 crDroid 9.17 GSI</a></p>
-<p><a href="https://www.bilibili.com/opus/624055294964199515">MTK（联发科）黑砖拯救（无法进入fastboot或recovery）</a></p>
-<p><a href="https://xdaforums.com/t/guide-how-to-properly-solve-the-errors-of-the-sp-flash-tool-for-merlin-redmi-note-9-redmi-10x-4g.4238161/">如何正确解决 SP FLASH TOOL for MERLIN 的错误</a></p>
-<p><a href="https://blog.csdn.net/codingnotes/article/details/78595500">通过SP_Flash_Tool线刷失败解决方法</a></p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>配置信息参见 <a href="https://detail.zol.com.cn/cell_phone/index1358240.shtml">https://detail.zol.com.cn/cell_phone/index1358240.shtml</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>N1盒子折腾小记</title>
     <url>/2025/02/09/N1%E7%9B%92%E5%AD%90%E6%8A%98%E8%85%BE%E5%B0%8F%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -210,25 +117,81 @@ DNS地址：192.168.1.1或8.8.8.8</p>
       </tags>
   </entry>
   <entry>
-    <title>git连接GitHub-ssh异常</title>
-    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
-<p><img src="1.webp" alt=""><br>
-<img src="2.webp" alt=""></p>
-<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
-<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
-<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
-<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
-<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
-<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
+    <title>Root备忘录</title>
+    <url>/2024/11/08/Root%E5%A4%87%E5%BF%98%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="root-bei-wang-lu">root备忘录</h1>
+<h2 id="qian-yan" id="前言">前言</h2>
+<p>本人的手机于2022年2月7日购入，如今它的电池已经不耐操了，一天要两充到三充。可是它运行流畅（指流畅运行巨信），现在换机显得浪费我这个芯片了。那么，改一下系统调度会不会好一些呢🤔。好，来刷个机吧。</p>
+<p>以下记录了遇到的问题以备日后不时之需。</p>
+<h2 id="she-bei" id="设备">设备</h2>
+<ul>
+<li>Redmi Note 10 Pro<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
+</ul>
+<h2 id="root" id="root">root</h2>
+<p>用小米解锁工具解锁之后，第一次重启卡在了MIUI界面，想起来解锁前忘记打开“OEM解锁”了，吓得我一身冷汗😰。好在第二次重启成功了，没有变砖🥰。</p>
+<h2 id="guo-momo-jian-ce" id="过momo检测">过momo检测</h2>
+<p>我使用了kitsune mask作为root管理器，它本身提供了较强大的隐藏root的功能。隐藏root有白名单和黑名单两种模式。一般使用黑名单模式即可，不过勾选进黑名单的应用貌似无法启动，会卡白屏（测试了微信和momo两个应用），大概是我手机的玄学问题吧。白名单模式就没事了。</p>
+<p>开启隐藏前：<br>
+<img src="qian.webp" alt=""><br>
+开启隐藏后：<br>
+<img src="hou.webp" alt=""></p>
+<p>至于bootloader未锁定，可以通过刷safetynet fix模块来骗过momo，但不知道能不能骗过其他程序。</p>
+<h2 id="wei-xin-xiao-cheng-xu-wu-fa-da-kai" id="微信小程序无法打开">微信小程序无法打开</h2>
+<p>下载了Google play版微信，但发现小程序打不开😱，点小程序就卡在“正在加载”，难道是root的问题？瞎调一番后，偶然打开Google play，提示正在更新微信，更新完就能开小程序了😅。</p>
+<h2 id="wu-fa-lian-jie-wi-fi" id="无法连接WiFi">无法连接WiFi</h2>
+<p>打算连接舍友的手机热点，发现连不上，怎么点都显示“已保存”。几番调试，发现是无法连接WPA3-Personal加密的WiFi，其他加密方式可以连。但是之前我倒是可以连舍友WiFi。目前暂未找到解决方案。</p>
+<p><img src="wifi.webp" alt=""></p>
+<hr>
+<h1 id="lei-yuan-sheng-zhi-lu">类原生之旅</h1>
+<p>网上看到DSU Sideload这个软件.它利用了安卓自带的动态系统更新功能，但是可以自己分配动态系统的用户数据空间。也就是说，可以讲这个动态系统作为主力系统使用🤪。于是尝试了刷入CrDroid的GSI(通用系统镜像)。这可是人生中第一次用类原生当主力机器🥰。但是毕竟没经过适配，所以系统有Bug。</p>
+<p>CrDroid 9.X（安卓13） 版本下的bug：</p>
+<ul>
+<li>蓝牙断连</li>
+<li>5G环境下无法通话和收发短信</li>
+<li>无法使用杜比全景声</li>
+</ul>
+<p>CrDroid 10.X（安卓14） 版本下的bug：</p>
+<ul>
+<li>无法使用人脸识别</li>
+<li>仅使用了几天，测试不全</li>
+</ul>
+<p>刷上去之后，本以为可以回到一天一充的时代，但是貌似是我高估了类原生了。一天两充还是最低标准😥。看来就是硬件损耗了。</p>
+<p>用了一段时间，还是不能自适应这些bug，而且续航并没有提升。还是回去MIUI吧😅。</p>
+<p><s>为什么这一段没图呢？因为手机现在已经变砖了</s></p>
+<h1 id="yuan-ni-shua-ji-ban-sheng-gui-lai-gui-bu-lai-liao-a-a-a">愿你刷机半生，归来…归不来了啊啊啊</h1>
+<p>前文提到我使用的是动态系统。回去之前的MIUI14还是很顺利的。但是有一个说法：出厂系统就是最好的系统。于是决定刷回出厂的MIUI12.5.</p>
+<p>当然是选择最安全的Fastboot + miflash刷机大法。但在此之前，我萌生了个想法：何不把boot.img文件用magisk修补之后放回刷机包呢，这样就不用再次进Fastboot来root了🤪。</p>
+<p>经过漫长的等待，得到的是进度条的标红＞﹏＜，提示check boot_ab failed。看起来我偷梁换柱的计划露出鸡脚了。但是它还停留在Fastboot界面。</p>
+<p>好吧，已老实。刷原系统吧。这下总不会有问题吧，于是我安心地去刷牙了（此时是22：40）。</p>
+<p>事实证明，不要晚上刷机。刷完牙回来，天都塌了</p>
+<p>屏幕上鲜艳的红条直接让我心肺骤停（也是提示check xxx failed）。？？？，这还能报错？屏幕还黑了？尝试重新进入Fastboot…</p>
+<p>它没反应！！！而且电脑还一直有插入、拔出设备的提示音！看着计算机设备上的MediaTek device陷入了沉思，这是给我干进深度刷机里了？</p>
+<p>按照网上方法，使用SP Flash救砖。但是多次尝试，换了两个刷机包，仍然报错</p>
+<p><img src="dead.webp" alt=""></p>
+<p>已经23：45了，明天还要上课＞︿＜。当机立断，下单Redmi K80，以后再也不乱搞主力机了😭。<s>想不到我也有冲首发的一天</s></p>
+<hr>
+<p><s>我敬爱的Redmi Note 10 Pro同志Fastboot刷机失败，深度刷机抢救无效，于2024年11月28日逝世，享年2.8岁</s></p>
+<p>还是选择了闲鱼花30￥让手机起死回生，现在它又活了*^____^*。<br>
+为什么之前刷不进去呢？据闲鱼卖家说，刷入官方包的DA.bin文件需要验证，所以会卡红条。</p>
+<h1 id="can-kao-wen-xian">参考文献</h1>
+<p><a href="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-%28GSI%29-list">部分类原生GSI</a></p>
+<p><a href="https://www.bilibili.com/opus/990431050619420673">红米 note 10 pro 刷入 crDroid 9.17 GSI</a></p>
+<p><a href="https://www.bilibili.com/opus/624055294964199515">MTK（联发科）黑砖拯救（无法进入fastboot或recovery）</a></p>
+<p><a href="https://xdaforums.com/t/guide-how-to-properly-solve-the-errors-of-the-sp-flash-tool-for-merlin-redmi-note-9-redmi-10x-4g.4238161/">如何正确解决 SP FLASH TOOL for MERLIN 的错误</a></p>
+<p><a href="https://blog.csdn.net/codingnotes/article/details/78595500">通过SP_Flash_Tool线刷失败解决方法</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>配置信息参见 <a href="https://detail.zol.com.cn/cell_phone/index1358240.shtml">https://detail.zol.com.cn/cell_phone/index1358240.shtml</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>ssh</tag>
-        <tag>git</tag>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -288,6 +251,28 @@ GND——GND</p>
         <tag>Linux</tag>
         <tag>香橙派</tag>
         <tag>单板机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git连接GitHub-ssh异常</title>
+    <url>/2024/07/04/git%E8%BF%9E%E6%8E%A5GitHub-ssh%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p>事情是这样的，今天提交文章时，突然出现这样的情况</p>
+<p><img src="1.webp" alt=""><br>
+<img src="2.webp" alt=""></p>
+<p>以前也会出现这种情况，不过是连了steam++加速GitHub才会出现ssh密钥验证失败，可是今天裸连都出现这种情况了。</p>
+<p>于是采用最原始的方法：重新添加sshkey到GitHub上，顺便改一下域名。</p>
+<p>反正平时都要开steam++才能打开GitHub，干脆就开着它直接生成ssh公钥吧。</p>
+<p>hexo部署，生成，一气呵成，然后要我输入密码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github&#x27;s password:</span><br><span class="line"></span><br><span class="line">permission denied please try again.</span><br></pre></td></tr></table></figure>
+<p>输半天都输不对，特意改了GitHub密码，依然输不对🤬</p>
+<p>关闭steam++生成公钥试试，然后…就成功了？？？ <code>hexo d</code> 的时候根本不要求我输入密码</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -362,6 +347,21 @@ GND——GND</p>
       </tags>
   </entry>
   <entry>
+    <title>你好，世界！</title>
+    <url>/2024/05/20/hello_world/</url>
+    <content><![CDATA[<p>这是博客建站的第一篇文章，用以测试博客是否正常运行，如果你看到了这篇文章，那这个博客已经可以正常工作啦！这个博客应该主要用于分享我的生活（因为vx朋友圈有各种各样的原因使我不能愉快的畅谈）。我偶尔会写一些我的折腾历程，让大家看看我踩过的坑，帮大家排排雷。</p>
+<hr>
+<p>感谢友人<a href="https://yuuu.org/">竹月</a>，他在我建站时不费余力地解答我的疑惑。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从《外剧》主题曲谈社会的变迁</title>
     <url>/2025/04/12/%E4%BB%8E%E3%80%8A%E5%A4%96%E5%89%A7%E3%80%8B%E4%B8%BB%E9%A2%98%E6%9B%B2%E8%B0%88%E7%A4%BE%E4%BC%9A%E7%9A%84%E5%8F%98%E8%BF%81/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -390,36 +390,6 @@ GND——GND</p>
       </categories>
       <tags>
         <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于网盘观影</title>
-    <url>/2025/08/30/%E5%85%B3%E4%BA%8E%E7%BD%91%E7%9B%98%E8%A7%82%E5%BD%B1/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>之前N1盒子的文章中，我提及了自建Emby媒体库，但是它有着致命的缺点———需要下载。设想这样一个场景，在网上看到一部喜欢的电影，想马上看，但是需要苦苦等待下载，等到下载完了，你的空闲时间也过去了，而这部影片最后只能躺在Emby里吃灰。</p>
-<p>我觉得，方便才是观影的第一生产力。网盘转存即看，又不失高画质，完美符合了我的理想观影状态。</p>
-<h1 id="wang-pan-guan-ying-yao-jie-jue-de-san-da-wen-ti">网盘观影要解决的三大问题</h1>
-<ul>
-<li>网盘会员</li>
-<li>资源站</li>
-<li>观看软件</li>
-</ul>
-<h1 id="jie-jue-fang-an">解决方案</h1>
-<p>经过我的摸索，终于找出了一个性价比方案。</p>
-<p>网盘：天翼云盘。普通用户不限速，仅需在闲鱼购买空间扩容包即可使用<br>
-资源站：海绵小站、天逸搜<br>
-观看软件：网易爆米花、vidhub等。建议寻找可以直连天翼云盘的软件。</p>
-<p>备选方案</p>
-<p>网盘：夸克88vip<br>
-资源站：满大街都是<br>
-观看软件：william player，可直连夸克<br>
-（88vip可以看原画，听说用网高峰时速度很慢）</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>观影</tag>
       </tags>
   </entry>
   <entry>
@@ -528,6 +498,7 @@ GND——GND</p>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
 <p>本文章仅供用于学习研究，请勿用于不合规不合法用途，否则后果自负，与文章作者无关！！！</p>
 <p>我最近搜索了一下GFW的工作原理，故写下这篇文章记录我对GFW的理解。</p>
+<p>最新版Chrome已经移除了<code>--host-rules</code>标签，本文方法不再有效。</p>
 <h1 id="yuan-li">原理</h1>
 <p>目前，GFW主要通过三个方面进行屏蔽：IP黑洞、DNS污染、SNI阻断。</p>
 <h2 id="ip-hei-dong" id="IP黑洞">IP黑洞</h2>
@@ -808,6 +779,36 @@ GND——GND</p>
       </tags>
   </entry>
   <entry>
+    <title>关于网盘观影</title>
+    <url>/2025/08/30/%E5%85%B3%E4%BA%8E%E7%BD%91%E7%9B%98%E8%A7%82%E5%BD%B1/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>之前N1盒子的文章中，我提及了自建Emby媒体库，但是它有着致命的缺点———需要下载。设想这样一个场景，在网上看到一部喜欢的电影，想马上看，但是需要苦苦等待下载，等到下载完了，你的空闲时间也过去了，而这部影片最后只能躺在Emby里吃灰。</p>
+<p>我觉得，方便才是观影的第一生产力。网盘转存即看，又不失高画质，完美符合了我的理想观影状态。</p>
+<h1 id="wang-pan-guan-ying-yao-jie-jue-de-san-da-wen-ti">网盘观影要解决的三大问题</h1>
+<ul>
+<li>网盘会员</li>
+<li>资源站</li>
+<li>观看软件</li>
+</ul>
+<h1 id="jie-jue-fang-an">解决方案</h1>
+<p>经过我的摸索，终于找出了一个性价比方案。</p>
+<p>网盘：天翼云盘。普通用户不限速，仅需在闲鱼购买空间扩容包即可使用<br>
+资源站：海绵小站、天逸搜<br>
+观看软件：网易爆米花、vidhub等。建议寻找可以直连天翼云盘的软件。</p>
+<p>备选方案</p>
+<p>网盘：夸克88vip<br>
+资源站：满大街都是<br>
+观看软件：william player，可直连夸克<br>
+（88vip可以看原画，听说用网高峰时速度很慢）</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>观影</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>家居布光</title>
     <url>/2025/04/16/%E5%AE%B6%E5%B1%85%E5%B8%83%E5%85%89/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -1067,117 +1068,6 @@ A：昨天看了电影，今天在豆瓣逛了一下</p>
       </tags>
   </entry>
   <entry>
-    <title>网站更换域名啦</title>
-    <url>/2024/11/25/%E7%BD%91%E7%AB%99%E6%9B%B4%E6%8D%A2%E5%9F%9F%E5%90%8D%E5%95%A6/</url>
-    <content><![CDATA[<p>近期看到了个新闻，说是io域名药丸😨<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，拖了近一个月，终于决定处理这件事了——换域名。不知道有没有用，但至少可以换个符合博客名字的域名啦🥰。</p>
-<p>首先，买个域名。奈何本人不想每年交一笔钱来运营这个没人看的博客，于是选择了免费的二级域名。我选择了cloudns提供的二级域名，如下图设置就行</p>
-<p><img src="cloudns.webp" alt=""></p>
-<p>然后去GitHub如下设置自定义域名，成功了会显示DNS check successful，然后再等十几分钟，因为证书要刷新。最后记得清除浏览器缓存再看效果！！！</p>
-<p><img src="github1.webp" alt=""></p>
-<p>（可选）加上Enforce HTTPS，成功样例如下图</p>
-<p><img src="github2.webp" alt=""></p>
-<p>但是下次hexo更新文章的时候会把根目录下的CNAME文件清除，这样会导致配置的域名失<br>
-效，所以要在souce目录下添加上CNAME文件，里面填上自己的域名。</p>
-<p><img src="%E6%9C%AC%E5%9C%B0.webp" alt=""></p>
-<hr>
-<p>参考教程<br>
-<a href="https://www.cnblogs.com/gambler/p/12051638.html">https://www.cnblogs.com/gambler/p/12051638.html</a></p>
-<p><a href="https://segmentfault.com/a/1190000011203711">https://segmentfault.com/a/1190000011203711</a></p>
-<p>域名解决方案</p>
-<p><a href="https://www.tjsky.net/tutorial/922">https://www.tjsky.net/tutorial/922</a></p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><a href="https://www.ithome.com/0/801/540.htm">https://www.ithome.com/0/801/540.htm</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>组一个廉价后环绕声</title>
-    <url>/2025/01/13/%E7%BB%84%E4%B8%80%E4%B8%AA%E5%BB%89%E4%BB%B7%E5%90%8E%E7%8E%AF%E7%BB%95%E5%A3%B0/</url>
-    <content><![CDATA[<h1 id="qian-yan">前言</h1>
-<p>闲来无事，掏出了许久之前买的两只联想Thinkplue-K3 Pro。本来是打算给家里的投影仪用的，但是一时半会还不能回家，于是先给自己的电脑用上先😋。</p>
-<p>这两只音响的低频表现过于垃圾，想着搜索一下能不能给音响加一个倒相孔，但是偶然一个走神，刷到了b站视频教我怎么用外接音响配合电脑音响组成环绕声。欸🤓，那就来研究一下吧。</p>
-<h1 id="ruan-jian-an-zhuang">软件安装</h1>
-<p>使用一个虚拟声卡软件Voicemeeter，可以将不同品牌的音响分别映射到不同的声音输出通道。~~万物断连变万物互联啦。~~可惜的是这个方案只支持在电脑端使用，想在电视机上用只能把电脑连电视了。</p>
-<p>进入Voicemeeter官网，选择Banana版本即可（Potato版本是捐赠版，可以控制5个声音设备，但能控制3个设备的Banana应该够我们用了吧）<br>
-<a href="https://vb-audio.com/Voicemeeter/index.htm">https://vb-audio.com/Voicemeeter/index.htm</a><br>
-<img src="%E5%AE%98%E7%BD%91.webp" alt=""><br>
-<img src="%E4%B8%8B%E8%BD%BD.webp" alt=""></p>
-<p>下载完成后解压文件，双击安装，无脑下一步（Voicemeeter无法更改安装目录）<br>
-<img src="%E5%AE%89%E8%A3%85.webp" alt=""></p>
-<p>安装完重启一遍电脑。</p>
-<h1 id="pei-zhi-ruan-jian">配置软件</h1>
-<p>在开始菜单中打开Voicemeeter Banana ×64（应该不会还有人用32位电脑吧🧐）<br>
-<img src="banana.webp" alt=""></p>
-<p>关闭不必要的功能。关闭蓝色框内的功能，只需要关注红色框里的内容。<br>
-红色框里，只需开启A1，A2，A3，其他功能关闭。A1，A2，A3是输入通道，接了多少个设备，就开多少个通道（电脑内置音响也算一个通道）。<br>
-<img src="%E5%85%B3%E9%97%AD%E5%8A%9F%E8%83%BD.webp" alt=""></p>
-<p>接下来配置输入通道，在A1，A2，A3分别选择音响设备，其中A1最好选择的是主力设备。<br>
-<img src="%E9%85%8D%E7%BD%AE1.webp" alt=""></p>
-<p>左侧WDM和MME均可选择，其中WDM延迟较低，MME对设备兼容性好。我的电脑选WDM会有电流声，于是选择了MME<br>
-<img src="%E9%85%8D%E7%BD%AE2.webp" alt=""></p>
-<p>然后映射声道，点击红框，换成所需的声道。鼠标左键切换下一个，鼠标右键切换上一个。Normal是前左和前右喇叭，MIX down A、MIX down B是所有喇叭，rear only是后喇叭，center only是前中置喇叭。<br>
-<img src="%E5%A3%B0%E9%81%93.webp" alt=""></p>
-<p>这里提供的预设似乎有些少，那么接下来就该请出另一个软件了：8x8 Output Matrix。它基于Voicemeeter Banana的声道设置运行，这里可以更自由地映射声道。<br>
-<img src="8matrix.webp" alt=""></p>
-<p>首先，在Voicemeeter Banana中设置声道映射模式为Normal mode，然后进入8x8 Output Matrix，选择设备（Bus A1、A2、A3）进行映射。In指的是电脑视频的音频信号，Out指的是音响的物理声道，数字的对应关系如图。<br>
-<img src="matrix.webp" alt=""></p>
-<p>例如，我希望我的电脑扬声器输出前左、中置、前右、低音四个信号，这时候我只需要关注Out1和Out2这两行，因为我电脑扬声器在物理上只有两个：左扬声器和右扬声器，其他行怎么调都不会有反应。前左、前右正常输出，中置、低音同时输出到电脑的两个扬声器，则需要把In3分配给Out1和Out2，In4也要分配给Out1和Out2。如下图所设定。<br>
-<img src="matrix2.webp" alt=""></p>
-<p>配置好后，在任务栏搜索框里搜索“声音”<br>
-<img src="%E6%94%B9%E5%8F%98%E5%A3%B0%E9%9F%B3.webp" alt=""></p>
-<p>点击“播放”，找到Voicemeeter Input，鼠标右键点击它，先设为默认设备，再点击配置扬声器。<br>
-<img src="%E9%85%8D%E7%BD%AE%E6%89%AC%E5%A3%B0%E5%99%A8.webp" alt=""></p>
-<p>然后选择合适的声道预设（我选的是5.1环绕），点击绿框内的喇叭，对应声道会发声，可以测试每个声道是否正确。如果之前选择错误，可以打开8x8 Output Matrix重新调整声道映射方法。<br>
-<img src="%E6%B5%8B%E8%AF%95%E5%A3%B0%E9%81%93.webp" alt=""></p>
-<p>最好不要存在无声音的声道，否则一些5.1声道的电影或游戏会失去那个声道的声音。调整好之后点下一步。如果你有低音单元，请<code>不要</code>开启全音域扬声器。<br>
-<img src="%E5%85%A8%E9%9F%B3%E5%9F%9F.webp" alt=""></p>
-<p>至此，我们已经可以享用环绕声啦。</p>
-<h1 id="she-zhi-kai-ji-zi-qi-dong">设置开机自启动</h1>
-<p>Voicemeeter需要一直在后台才能输出声音。最好把它设置为开机自启动。<br>
-打开Voicemeeter Banana，点击Menu，如图勾选。<br>
-<img src="%E8%87%AA%E5%90%AF%E5%8A%A8.webp" alt=""></p>
-<p>为什么要勾选System Tray呢？勾选上之后，叉掉Voicemeeter Banana时就不会完全退出软件了，而是龟缩到系统托盘里。</p>
-<p>同样，8x8 Output Matrix这个软件也需要保持后台运行。<br>
-<img src="matrix3.webp" alt=""></p>
-<h1 id="jiang-di-yan-chi">降低延迟</h1>
-<p>据说打游戏时声音略有延迟，此时可以以管理员身份打开Pannel<br>
-<img src="pannel.webp" alt=""></p>
-<p>点击Options，点击Set Max Latency:4096 smp<br>
-<img src="Windows%E9%9F%B3%E9%87%8F.webp" alt=""></p>
-<p>这样会降低总体声音延迟。</p>
-<h1 id="lan-ya-you-xian-yin-xiang-hun-yong">蓝牙、有线音响混用</h1>
-<p>但是，如果你连接的是蓝牙音响，会发现蓝牙音响比电脑内置音响发声慢。这时候要单独调整延迟。打开Voicemeeter Banana，点击Menu，然后点System settings<br>
-<img src="%E8%AE%BE%E7%BD%AE.webp" alt=""></p>
-<p>由于我们无法把延迟设成负数，只能让电脑内置音响延迟发声以达到电脑音响和蓝牙音响同步发声的目的。找到OUT A1，那一列可以调整A1，A2，A3的延迟。<br>
-<img src="%E5%BB%B6%E8%BF%9F.webp" alt=""></p>
-<p>可以打开Voicemeeter Banana把声道映射全改成MIX down B，再打开声音预设，点击绿框内喇叭播放声音测试电脑音响是否和蓝牙音响同步发声。<br>
-<img src="%E6%B5%8B%E8%AF%95%E5%A3%B0%E9%81%93.webp" alt=""></p>
-<p>不过这样一来，上一步降低的延迟又提高了（悲）</p>
-<h1 id="diao-zheng-yin-liang-da-xiao">调整音量大小</h1>
-<p>刚配置好后会发现，系统的调整音量功能无法使用了！！！当然，这是有解决办法的。</p>
-<p>打开pannel，勾选上Enable Windows Volume Control，重启一下电脑就行。<br>
-<img src="Windows%E9%9F%B3%E9%87%8F.webp" alt=""></p>
-<h1 id="can-kao-wen-xian">参考文献</h1>
-<p><a href="https://www.bilibili.com/video/BV1Hj421d7j3/">旧音响别扔，免费组建5.1环绕声，感受悔恨之泪，VoiceMeeter组多设备详细教程</a></p>
-<p><a href="https://www.bilibili.com/video/BV1vB4y1Y7MM/">使用VoiceMeeter 让电脑喇叭与蓝牙音箱同时播放音频 一招解决声音不同步</a></p>
-<p><a href="https://www.bilibili.com/video/BV1Ykc7ewESK/">Voicemeeter使用系统音量控制和调整声音大小</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>音响</tag>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>科目三记事</title>
     <url>/2024/07/31/%E7%A7%91%E7%9B%AE%E4%B8%89%E8%AE%B0%E4%BA%8B/</url>
     <content><![CDATA[<h1 id="qian-yan">前言</h1>
@@ -1312,6 +1202,119 @@ ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
       <tags>
         <tag>杂谈</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>组一个廉价后环绕声</title>
+    <url>/2025/01/13/%E7%BB%84%E4%B8%80%E4%B8%AA%E5%BB%89%E4%BB%B7%E5%90%8E%E7%8E%AF%E7%BB%95%E5%A3%B0/</url>
+    <content><![CDATA[<h1 id="qian-yan">前言</h1>
+<p>闲来无事，掏出了许久之前买的两只联想Thinkplue-K3 Pro。本来是打算给家里的投影仪用的，但是一时半会还不能回家，于是先给自己的电脑用上先😋。</p>
+<p>这两只音响的低频表现过于垃圾，想着搜索一下能不能给音响加一个倒相孔，但是偶然一个走神，刷到了b站视频教我怎么用外接音响配合电脑音响组成环绕声。欸🤓，那就来研究一下吧。</p>
+<h1 id="ruan-jian-an-zhuang">软件安装</h1>
+<p>使用一个虚拟声卡软件Voicemeeter，可以将不同品牌的音响分别映射到不同的声音输出通道。~~万物断连变万物互联啦。~~可惜的是这个方案只支持在电脑端使用，想在电视机上用只能把电脑连电视了。</p>
+<p>进入Voicemeeter官网，选择Banana版本即可（Potato版本是捐赠版，可以控制5个声音设备，但能控制3个设备的Banana应该够我们用了吧）<br>
+<a href="https://vb-audio.com/Voicemeeter/index.htm">https://vb-audio.com/Voicemeeter/index.htm</a><br>
+<img src="%E5%AE%98%E7%BD%91.webp" alt=""><br>
+<img src="%E4%B8%8B%E8%BD%BD.webp" alt=""></p>
+<p>下载完成后解压文件，双击安装，无脑下一步（Voicemeeter无法更改安装目录）<br>
+<img src="%E5%AE%89%E8%A3%85.webp" alt=""></p>
+<p>安装完重启一遍电脑。</p>
+<h1 id="pei-zhi-ruan-jian">配置软件</h1>
+<p>在开始菜单中打开Voicemeeter Banana ×64（应该不会还有人用32位电脑吧🧐）<br>
+<img src="banana.webp" alt=""></p>
+<p>关闭不必要的功能。关闭蓝色框内的功能，只需要关注红色框里的内容。<br>
+红色框里，只需开启A1，A2，A3，其他功能关闭。A1，A2，A3是输入通道，接了多少个设备，就开多少个通道（电脑内置音响也算一个通道）。<br>
+<img src="%E5%85%B3%E9%97%AD%E5%8A%9F%E8%83%BD.webp" alt=""></p>
+<p>接下来配置输入通道，在A1，A2，A3分别选择音响设备，其中A1最好选择的是主力设备。<br>
+<img src="%E9%85%8D%E7%BD%AE1.webp" alt=""></p>
+<p>左侧WDM和MME均可选择，其中WDM延迟较低，MME对设备兼容性好。我的电脑选WDM会有电流声，于是选择了MME<br>
+<img src="%E9%85%8D%E7%BD%AE2.webp" alt=""></p>
+<p>然后映射声道，点击红框，换成所需的声道。鼠标左键切换下一个，鼠标右键切换上一个。Normal是前左和前右喇叭，MIX down A、MIX down B是所有喇叭，rear only是后喇叭，center only是前中置喇叭。<br>
+<img src="%E5%A3%B0%E9%81%93.webp" alt=""></p>
+<p>这里提供的预设似乎有些少，那么接下来就该请出另一个软件了：8x8 Output Matrix。它基于Voicemeeter Banana的声道设置运行，这里可以更自由地映射声道。<br>
+<img src="8matrix.webp" alt=""></p>
+<p>首先，在Voicemeeter Banana中设置声道映射模式为Normal mode，然后进入8x8 Output Matrix，选择设备（Bus A1、A2、A3）进行映射。In指的是电脑视频的音频信号，Out指的是音响的物理声道，数字的对应关系如图。<br>
+<img src="matrix.webp" alt=""></p>
+<p>例如，我希望我的电脑扬声器输出前左、中置、前右、低音四个信号，这时候我只需要关注Out1和Out2这两行，因为我电脑扬声器在物理上只有两个：左扬声器和右扬声器，其他行怎么调都不会有反应。前左、前右正常输出，中置、低音同时输出到电脑的两个扬声器，则需要把In3分配给Out1和Out2，In4也要分配给Out1和Out2。如下图所设定。<br>
+<img src="matrix2.webp" alt=""></p>
+<p>配置好后，在任务栏搜索框里搜索“声音”<br>
+<img src="%E6%94%B9%E5%8F%98%E5%A3%B0%E9%9F%B3.webp" alt=""></p>
+<p>点击“播放”，找到Voicemeeter Input，鼠标右键点击它，先设为默认设备，再点击配置扬声器。<br>
+<img src="%E9%85%8D%E7%BD%AE%E6%89%AC%E5%A3%B0%E5%99%A8.webp" alt=""></p>
+<p>然后选择合适的声道预设（我选的是5.1环绕），点击绿框内的喇叭，对应声道会发声，可以测试每个声道是否正确。如果之前选择错误，可以打开8x8 Output Matrix重新调整声道映射方法。<br>
+<img src="%E6%B5%8B%E8%AF%95%E5%A3%B0%E9%81%93.webp" alt=""></p>
+<p>最好不要存在无声音的声道，否则一些5.1声道的电影或游戏会失去那个声道的声音。调整好之后点下一步。如果你有低音单元，请<code>不要</code>开启全音域扬声器。<br>
+<img src="%E5%85%A8%E9%9F%B3%E5%9F%9F.webp" alt=""></p>
+<p>至此，我们已经可以享用环绕声啦。</p>
+<h1 id="she-zhi-kai-ji-zi-qi-dong">设置开机自启动</h1>
+<p>Voicemeeter需要一直在后台才能输出声音。最好把它设置为开机自启动。<br>
+打开Voicemeeter Banana，点击Menu，如图勾选。<br>
+<img src="%E8%87%AA%E5%90%AF%E5%8A%A8.webp" alt=""></p>
+<p>为什么要勾选System Tray呢？勾选上之后，叉掉Voicemeeter Banana时就不会完全退出软件了，而是龟缩到系统托盘里。</p>
+<p>同样，8x8 Output Matrix这个软件也需要保持后台运行。<br>
+<img src="matrix3.webp" alt=""></p>
+<h1 id="jiang-di-yan-chi">降低延迟</h1>
+<p>据说打游戏时声音略有延迟，此时可以以管理员身份打开Pannel<br>
+<img src="pannel.webp" alt=""></p>
+<p>点击Options，点击Set Max Latency:4096 smp<br>
+<img src="Windows%E9%9F%B3%E9%87%8F.webp" alt=""></p>
+<p>这样会降低总体声音延迟。</p>
+<h1 id="lan-ya-you-xian-yin-xiang-hun-yong">蓝牙、有线音响混用</h1>
+<p>但是，如果你连接的是蓝牙音响，会发现蓝牙音响比电脑内置音响发声慢。这时候要单独调整延迟。打开Voicemeeter Banana，点击Menu，然后点System settings<br>
+<img src="%E8%AE%BE%E7%BD%AE.webp" alt=""></p>
+<p>由于我们无法把延迟设成负数，只能让电脑内置音响延迟发声以达到电脑音响和蓝牙音响同步发声的目的。找到OUT A1，那一列可以调整A1，A2，A3的延迟。<br>
+<img src="%E5%BB%B6%E8%BF%9F.webp" alt=""></p>
+<p>可以打开Voicemeeter Banana把声道映射全改成MIX down B，再打开声音预设，点击绿框内喇叭播放声音测试电脑音响是否和蓝牙音响同步发声。<br>
+<img src="%E6%B5%8B%E8%AF%95%E5%A3%B0%E9%81%93.webp" alt=""></p>
+<p>不过这样一来，上一步降低的延迟又提高了（悲）</p>
+<h1 id="diao-zheng-yin-liang-da-xiao">调整音量大小</h1>
+<p>刚配置好后会发现，系统的调整音量功能无法使用了！！！当然，这是有解决办法的。</p>
+<p>打开pannel，勾选上Enable Windows Volume Control，重启一下电脑就行。<br>
+<img src="Windows%E9%9F%B3%E9%87%8F.webp" alt=""></p>
+<h1 id="can-kao-wen-xian">参考文献</h1>
+<p><a href="https://www.bilibili.com/video/BV1Hj421d7j3/">旧音响别扔，免费组建5.1环绕声，感受悔恨之泪，VoiceMeeter组多设备详细教程</a></p>
+<p><a href="https://www.bilibili.com/video/BV1vB4y1Y7MM/">使用VoiceMeeter 让电脑喇叭与蓝牙音箱同时播放音频 一招解决声音不同步</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Ykc7ewESK/">Voicemeeter使用系统音量控制和调整声音大小</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>音响</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站更换域名啦</title>
+    <url>/2024/11/25/%E7%BD%91%E7%AB%99%E6%9B%B4%E6%8D%A2%E5%9F%9F%E5%90%8D%E5%95%A6/</url>
+    <content><![CDATA[<p>近期看到了个新闻，说是io域名药丸😨<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，拖了近一个月，终于决定处理这件事了——换域名。不知道有没有用，但至少可以换个符合博客名字的域名啦🥰。</p>
+<p>首先，买个域名。奈何本人不想每年交一笔钱来运营这个没人看的博客，于是选择了免费的二级域名。我选择了cloudns提供的二级域名，如下图设置就行</p>
+<p><img src="cloudns.webp" alt=""></p>
+<p>然后去GitHub如下设置自定义域名，成功了会显示DNS check successful，然后再等十几分钟，因为证书要刷新。最后记得清除浏览器缓存再看效果！！！</p>
+<p><img src="github1.webp" alt=""></p>
+<p>（可选）加上Enforce HTTPS，成功样例如下图</p>
+<p><img src="github2.webp" alt=""></p>
+<p>但是下次hexo更新文章的时候会把根目录下的CNAME文件清除，这样会导致配置的域名失<br>
+效，所以要在souce目录下添加上CNAME文件，里面填上自己的域名。</p>
+<p><img src="%E6%9C%AC%E5%9C%B0.webp" alt=""></p>
+<hr>
+<p>参考教程<br>
+<a href="https://www.cnblogs.com/gambler/p/12051638.html">https://www.cnblogs.com/gambler/p/12051638.html</a></p>
+<p><a href="https://segmentfault.com/a/1190000011203711">https://segmentfault.com/a/1190000011203711</a></p>
+<p><a href="https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site</a></p>
+<p><a href="https://linux.do/t/topic/446953">https://linux.do/t/topic/446953</a></p>
+<p>域名解决方案</p>
+<p><a href="https://www.tjsky.net/tutorial/922">https://www.tjsky.net/tutorial/922</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://www.ithome.com/0/801/540.htm">https://www.ithome.com/0/801/540.htm</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
   </entry>
   <entry>
     <title>“能跑就行”</title>
